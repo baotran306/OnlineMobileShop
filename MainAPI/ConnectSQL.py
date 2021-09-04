@@ -167,7 +167,7 @@ sql_connect = SqlFunction()
 # print(sql_connect.insert_staff('Trung', 'Nguyễn Đình', 'Nam', '1010101010', 'trungnd224@gmail.com', '0123456888',
 #                                '1980-03-21', 'Hà Tây', 'trungnd224', '123', 1000000, 3))
 # print(sql_connect.get_current_staff_password('tramskt1'))
-#sql_connect.test()
+# print(sql_connect.test())
 # print(sql_connect.check_existed_user('baobao', 0))
 # print(sql_connect.change_password_customer('mumumu', '12233', 'abc1'))
 # print(sql_connect.change_password_staff('tramskt1', '123', '456'))
