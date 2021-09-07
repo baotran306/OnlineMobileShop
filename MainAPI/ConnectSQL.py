@@ -143,8 +143,14 @@ class SqlFunction:
     def update_info(self, first_name, last_name, gender, identity_card, email, phone_num, dob, address, id_person):
         try:
             cursor = self.func
-            cursor.execute('exec ChangeInfoPerson ?, ?, ?, ?, ?, ?, ?, ?, ?', first_name, last_name, gender,
-                           identity_card, email, phone_num, dob, address, id_person)
+            sql = """
+                SET NOCOUNT ON;
+                DECLARE @RC int;
+                EXEC @RC = ChangeInfoPerson ?, ?, ?, ?, ?, ?, ?, ?, ?;
+                SELECT @RC AS rc;
+            """
+            values = (first_name, last_name, gender, identity_card, email, phone_num, dob, address, id_person)
+            cursor.execute(sql, values)
             cursor.commit()
             return True
         except Exception as ex:
@@ -180,20 +186,6 @@ class SqlFunction:
             print(ex)
             return []
 
-    def get_list_phone(self):
-        try:
-            cursor = self.func
-            cursor.execute('select * from GetListPhone()')
-            ans = []
-            for r in cursor:
-                ans.append(r)
-            cursor.commit()
-            return ans
-        except Exception as ex:
-            print(ex)
-            return []
-
-    # not complete
     def delete_staff(self, id_staff):
         try:
             staff_list = self.get_list_staff()
@@ -207,6 +199,152 @@ class SqlFunction:
         except Exception as ex:
             print(ex)
             return False
+
+    def check_login_staff(self, username, password):
+        try:
+            cursor = self.func
+            cursor.execute("select dbo.CheckLoginStaff(?, ?)", username, ef.hash_password(password))
+            ans = 0
+            for r in cursor:
+                ans = r[0]
+                break
+            cursor.commit()
+            if ans == 1:
+                return True
+            else:
+                return False
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def check_login_customer(self, username, password):
+        try:
+            cursor = self.func
+            cursor.execute("select dbo.CheckLoginCustomer(?, ?)", username, ef.hash_password(password))
+            ans = 0
+            for r in cursor:
+                ans = r[0]
+                break
+            cursor.commit()
+            if ans == 1:
+                return True
+            else:
+                return False
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def active_customer(self, email):
+        try:
+            cursor = self.func
+            cursor.execute("exec ActiveCustomer ?", email)
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def insert_phone(self, phone_name, phone_type, phone_description, quantity, img, color, price):
+        try:
+            cursor = self.func
+            sql = """
+                            SET NOCOUNT ON;
+                            DECLARE @RC int;
+                            exec InsertPhone ?, ?, ?, ?, ?, ?, ?;
+                            SELECT @RC as rc;
+                        """
+            values = (phone_name, phone_type, phone_description,
+                      quantity, img, color, price)
+            cursor.execute(sql, values)
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def insert_phone_type(self, name_phone_type):
+        try:
+            cursor = self.func
+            cursor.execute("exec InsertPhoneType ?", name_phone_type)
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def get_list_phone(self):
+        try:
+            cursor = self.func
+            cursor.execute('select * from GetListPhone()')
+            ans = []
+            for r in cursor:
+                temp = [r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], float(r[8])]
+                ans.append(temp)
+            cursor.commit()
+            return ans
+        except Exception as ex:
+            print(ex)
+            return []
+
+    def get_list_phone_type(self):
+        try:
+            cursor = self.func
+            cursor.execute('select * from GetListPhoneType()')
+            ans = []
+            for r in cursor:
+                ans.append([r[0], r[1]])
+            cursor.commit()
+            return ans
+        except Exception as ex:
+            print(ex)
+            return []
+
+    def update_phone(self, phone_name, phone_type, phone_description, quantity, img, color, price, id_phone):
+        try:
+            cursor = self.func
+            sql = """
+                    SET NOCOUNT ON;
+                    DECLARE @RC int;
+                    exec @RC = UpdatePhone ?, ?, ?, ?, ?, ?, ?, ?;
+                    select @RC AS rc;
+            """
+            values = (phone_name, phone_type, phone_description, quantity, img, color, price, id_phone)
+            cursor.execute(sql, values)
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def update_staff(self, role_id, salary, staff_id):
+        try:
+            cursor = self.func
+            sql = """
+                SET NOCOUNT ON;
+                DECLARE @RC int;
+                EXEC @RC = UpdateStaff ?, ?, ?;
+                SELECT @RC as rc;
+            """
+            values = (role_id, salary, staff_id)
+            cursor.execute(sql, values)
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def get_list_role(self):
+        try:
+            cursor = self.func
+            cursor.execute('select * from GetListRole()')
+            ans = []
+            for r in cursor:
+                ans.append([r[0], r[1]])
+            cursor.commit()
+            return ans
+        except Exception as ex:
+            print(ex)
+            return []
 
 
 # Test Function
@@ -222,4 +360,17 @@ sql_connect = SqlFunction()
 # print(sql_connect.change_password_staff('tramskt1', '123', '456'))
 # print(sql_connect.change_password_staff('hoaihoai1', '1234', '456'))
 # print(sql_connect.get_list_customer())
-print(sql_connect.delete_staff('STAFF_1'))
+# print(sql_connect.delete_staff('STAFF_1'))
+# print(sql_connect.check_login_staff('hoaihoai1', '123'))
+# print(sql_connect.active_customer('ngocngungoc@gmail.com'))
+# print(sql_connect.check_login_customer('ngocngoc', 'abc1'))
+# print(sql_connect.insert_phone_type('Oppo'))
+# print(sql_connect.insert_phone('IPhone X', 1, 'Xinh đẹp tuyệt vời', 10, 'a', 'Trắng', 30000000))
+# print(sql_connect.get_list_phone())
+# print(sql_connect.get_list_phone_type())
+# print(sql_connect.update_phone('Iphone 11', 1, 'Xinh ', 20, 'a', 'Xanh', 30000000, 2))
+# print(sql_connect.insert_supplier('Học viện Công nghệ Bưu Chính Viễn Thông TPHCM', '0987228173', '97 Man Thiện'))
+# print(sql_connect.update_info('Ngọc', 'Phạm Thị Bích', 'Nữ', '123827389', 'ngocngungoc@gmail.com', '0922132221',
+#                               '2003-04-09', 'Thái Bình', 'CUSTOMER_7'))
+# print(sql_connect.update_staff(3, 2500000, 'STAFF_3'))
+# print(sql_connect.get_list_role())
