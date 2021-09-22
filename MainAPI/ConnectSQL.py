@@ -163,7 +163,9 @@ class SqlFunction:
             cursor.execute('select * from GetListCustomer()')
             ans = []
             for r in cursor:
-                tmp = [r[0], r[1], r[2], r[3], r[4], r[5], r[6], str(r[7]), r[8], r[9], r[10], r[11]]
+                tmp = {'id': r[0], 'last_name': r[1], 'first_name': r[2], 'gender': r[3],
+                       'identity_card': r[4], 'email': r[5], 'phone_num': r[6], 'day_of_birth': str(r[7]),
+                       'address': r[8], 'username': r[9], 'is_active': r[11]}
                 ans.append(tmp)
             cursor.commit()
             return ans
@@ -177,8 +179,10 @@ class SqlFunction:
             cursor.execute('select * from GetListStaff()')
             ans = []
             for r in cursor:
-                tmp = [r[0], r[1], r[2], r[3], r[4], r[5], r[6], str(r[7]), r[8], r[9], r[10], r[11],
-                       r[12], float(r[13]), r[14]]
+                tmp = {'id': r[0], 'last_name': r[1], 'first_name': r[2], 'gender': r[3],
+                       'identity_card': r[4], 'email': r[5], 'phone_num': r[6], 'day_of_birth': str(r[7]),
+                       'address': r[8], 'username': r[9], 'role_id': r[11],
+                       'role_name': r[12], 'salary': float(r[13]), 'is_deleted': r[14]}
                 ans.append(tmp)
             cursor.commit()
             return ans
@@ -278,7 +282,9 @@ class SqlFunction:
             cursor.execute('select * from GetListPhone()')
             ans = []
             for r in cursor:
-                temp = [r[0], r[1], r[2], r[3], r[4], r[5], r[6], r[7], float(r[8])]
+                temp = {'id': r[0], 'phone_name': r[1], 'phone_type': r[2],
+                        'type_phone_name': r[3], 'phone_description': r[4], 'quantity': r[5],
+                        'img': r[6], 'color': r[7], 'price': float(r[8])}
                 ans.append(temp)
             cursor.commit()
             return ans
@@ -292,7 +298,7 @@ class SqlFunction:
             cursor.execute('select * from GetListPhoneType()')
             ans = []
             for r in cursor:
-                ans.append([r[0], r[1]])
+                ans.append({'id': r[0], 'type_phone_name': r[1]})
             cursor.commit()
             return ans
         except Exception as ex:
@@ -339,7 +345,7 @@ class SqlFunction:
             cursor.execute('select * from GetListRole()')
             ans = []
             for r in cursor:
-                ans.append([r[0], r[1]])
+                ans.append({'role_id': r[0], 'role_name': r[1]})
             cursor.commit()
             return ans
         except Exception as ex:
@@ -360,6 +366,7 @@ sql_connect = SqlFunction()
 # print(sql_connect.change_password_staff('tramskt1', '123', '456'))
 # print(sql_connect.change_password_staff('hoaihoai1', '1234', '456'))
 # print(sql_connect.get_list_customer())
+# print(sql_connect.get_list_staff())
 # print(sql_connect.delete_staff('STAFF_1'))
 # print(sql_connect.check_login_staff('hoaihoai1', '123'))
 # print(sql_connect.active_customer('ngocngungoc@gmail.com'))
