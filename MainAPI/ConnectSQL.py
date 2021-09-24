@@ -1,5 +1,5 @@
 import pyodbc
-import MainAPI.ExtraFunction as ef
+import OtherFunctions.ExtraFunction as ef
 
 connect = pyodbc.connect(
     "Driver={SQL Server Native Client 11.0};"
@@ -234,6 +234,16 @@ class SqlFunction:
                 return True
             else:
                 return False
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def insert_role_staff(self, role_name):
+        try:
+            cursor = self.func
+            cursor.execute('exec InsertRole ?', role_name)
+            cursor.commit()
+            return True
         except Exception as ex:
             print(ex)
             return False
