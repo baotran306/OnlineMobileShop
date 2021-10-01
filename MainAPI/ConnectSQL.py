@@ -93,15 +93,35 @@ class SqlFunction:
             print(ex)
             return ''
 
+    def get_customer_email_by_username(self, username):
+        try:
+            email = ''
+            cursor = self.func
+            cursor.execute('exec GetCustomerEmailByUserName ?', username)
+            for row in cursor:
+                email = row[0]
+            cursor.commit()
+            return email
+        except Exception as ex:
+            print(ex)
+            return ''
+
+    def reset_password_staff(self, username, password):
+        try:
+            cursor = self.func
+            cursor.execute('exec ChangePasswordStaff ?, ?', username, ef.hash_password(password))
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
     def change_password_staff(self, user, old_pass, new_pass):
         try:
             if self.check_existed_user(user, 1):
                 current_pass = self.get_current_staff_password(user)
                 if ef.hash_password(old_pass) == current_pass:
-                    cursor = self.func
-                    cursor.execute('exec ChangePasswordStaff ?, ?', user, ef.hash_password(new_pass))
-                    cursor.commit()
-                    return True
+                    return self.reset_password_staff(user, ef.hash_password(new_pass))
                 else:
                     return False
             else:
@@ -123,15 +143,22 @@ class SqlFunction:
             print(ex)
             return ''
 
+    def reset_password_customer(self, username, password):
+        try:
+            cursor = self.func
+            cursor.execute('exec ChangePasswordCustomer ?, ?', username, ef.hash_password(password))
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
     def change_password_customer(self, user, old_pass, new_pass):
         try:
             if self.check_existed_user(user, 0):
                 current_pass = self.get_current_customer_password(user)
                 if ef.hash_password(old_pass) == current_pass:
-                    cursor = self.func
-                    cursor.execute('exec ChangePasswordCustomer ?, ?', user, ef.hash_password(new_pass))
-                    cursor.commit()
-                    return True
+                    return self.reset_password_customer(user, ef.hash_password(new_pass))
                 else:
                     return False
             else:
@@ -194,7 +221,7 @@ class SqlFunction:
         try:
             staff_list = self.get_list_staff()
             for staff in staff_list:
-                if id_staff in staff:
+                if id_staff == staff['id']:
                     cursor = self.func
                     cursor.execute('exec DeleteStaff ?', id_staff)
                     cursor.commit()
