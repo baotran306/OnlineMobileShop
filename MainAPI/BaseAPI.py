@@ -1,11 +1,11 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import MainAPI.ConnectSQL
-import OtherFunctions.ExtraFunction as extra_funtion
+import OtherFunctions.ExtraFunction
 
 
+extra_function = OtherFunctions.ExtraFunction
 connect = MainAPI.ConnectSQL.SqlFunction()
-
 app = Flask(__name__)
 CORS(app)
 
@@ -352,9 +352,44 @@ def active_customer_account():
         return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
 
 
-@app.route("/<string:image_id>", methods=['GET'])
-def get_image(image_id):
-    return "localhost:5000/Image/Chelsea.jpg"
+@app.route("/customer/insert-order", methods=['POST'])
+def insert_customer_order():
+    try:
+        customer_id = request.json['customer_id']
+        address = request.json['address']
+        note = request.json['note']
+        phone_id_list = request.json['phone_id_list']
+        quantity_list = request.json['quantity_list']
+        price_list = request.json['price_list']
+        if connect.insert_customer_order(customer_id, address, None, note, phone_id_list, quantity_list, price_list):
+            data = {'result': True, 'info': 'Đặt hàng thành công'}
+            return jsonify(data)
+        else:
+            data = {'result': False, 'info': 'Đặt hàng thất bại'}
+            return jsonify(data)
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'info': 'Đặt hàng thất bại'})
+
+
+@app.route("/staff/update-order", methods=['POST'])
+def update_customer_order():
+    try:
+        staff_id = request.json['staff_id']
+        order_id = request.json['order_id']
+        status_id = request.json['status_id']
+        if connect.update_customer_order(order_id, staff_id, status_id):
+            data = {'result': True, 'info': 'Cập nhật thành công'}
+            return jsonify(data)
+        return jsonify({'result': False, 'info': 'Cập nhật thất bại'})
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
+
+
+@app.route("/get-image", methods=['GET'])
+def get_image():
+    return send_file("D:\\CODE\\Project_python\\MobileShop\\Image\\Chelsea.jpg", mimetype='image/gif')
 
 
 if __name__ == '__main__':

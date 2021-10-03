@@ -1,5 +1,7 @@
 import pyodbc
-import OtherFunctions.ExtraFunction as ef
+import OtherFunctions.ExtraFunction
+ef = OtherFunctions.ExtraFunction
+
 
 connect = pyodbc.connect(
     "Driver={SQL Server Native Client 11.0};"
@@ -109,7 +111,7 @@ class SqlFunction:
     def reset_password_staff(self, username, password):
         try:
             cursor = self.func
-            cursor.execute('exec ChangePasswordStaff ?, ?', username, ef.hash_password(password))
+            cursor.execute('exec ChangePasswordStaff ?, ?', username, password)
             cursor.commit()
             return True
         except Exception as ex:
@@ -146,7 +148,7 @@ class SqlFunction:
     def reset_password_customer(self, username, password):
         try:
             cursor = self.func
-            cursor.execute('exec ChangePasswordCustomer ?, ?', username, ef.hash_password(password))
+            cursor.execute('exec ChangePasswordCustomer ?, ?', username, password)
             cursor.commit()
             return True
         except Exception as ex:
@@ -388,6 +390,59 @@ class SqlFunction:
         except Exception as ex:
             print(ex)
             return []
+
+    def insert_customer_order(self, customer_id, address, staff_id, note,
+                              phone_id_list: list, quantity_list: list, price_list: list):
+        try:
+            cursor = self.func
+
+            # insert order info
+            sql_order = """
+                EXEC InsertCustomerOrder ?, ?, ?, ?;
+            """
+            values = (customer_id, address, staff_id, note)
+            cursor.execute(sql_order, values)
+            order_id = -1
+
+            # get id of new order
+            for r in cursor:
+                order_id = r[0]
+                print(order_id)
+                break
+
+            # insert order detail
+            sql_order_detail = """
+                            SET NOCOUNT ON;
+                            DECLARE @RC int;
+                            EXEC @RC = InsertCustomerOrderDetail ?, ?, ?, ?;
+                            SELECT @RC as rc;
+                        """
+            for index in range(0, len(phone_id_list)):
+                values = (order_id, phone_id_list[index], quantity_list[index], price_list[index])
+                cursor.execute(sql_order_detail, values)
+
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
+    def update_customer_order(self, order_id, staff_id, status_id):
+        try:
+            cursor = self.func
+            sql = """
+                SET NOCOUNT ON;
+                DECLARE @RC int;
+                EXEC @RC = UpdateCustomerOrder ?, ?, ?;
+                SELECT @RC as rc;
+            """
+            values = (order_id, staff_id, status_id)
+            cursor.execute(sql, values)
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
 
 
 # Test Function
