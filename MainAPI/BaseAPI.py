@@ -387,9 +387,9 @@ def update_customer_order():
         return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
 
 
-@app.route("/get-image", methods=['GET'])
-def get_image():
-    return send_file("D:\\CODE\\Project_python\\MobileShop\\Image\\Chelsea.jpg", mimetype='image/gif')
+@app.route("/get-image/<string:id_image>", methods=['GET'])
+def get_image(id_image):
+    return send_file("D:\\CODE\\Project_python\\MobileShop\\Image\\{}".format(id_image), mimetype='image/gif')
 
 
 if __name__ == '__main__':
