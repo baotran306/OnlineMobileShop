@@ -1,6 +1,9 @@
 import pyodbc
 import OtherFunctions.ExtraFunction
-ef = OtherFunctions.ExtraFunction
+import Configuration.ConfigFlag
+
+config_flag = Configuration.ConfigFlag
+extra_function = OtherFunctions.ExtraFunction
 
 
 connect = pyodbc.connect(
@@ -26,7 +29,7 @@ class SqlFunction:
                 SELECT @RC AS rc;
             """
             values = (first_name, last_name, gender, identity_card, email, phone_num,
-                      day_of_birth, address, username, ef.hash_password(password))
+                      day_of_birth, address, username, extra_function.hash_password(password))
             cursor.execute(sql, values)
             cursor.commit()
             return True
@@ -45,7 +48,7 @@ class SqlFunction:
                 SELECT @RC as rc;
             """
             values = (first_name, last_name, gender, identity_card, email, phone_num, day_of_birth, address,
-                      username, ef.hash_password(password), salary, role)
+                      username, extra_function.hash_password(password), salary, role)
             cursor.execute(sql, values)
             cursor.commit()
             return True
@@ -63,14 +66,14 @@ class SqlFunction:
             print(ex)
             return False
 
-    def check_existed_user(self, user, type_user=0):
+    def check_existed_user(self, user, type_user=config_flag.type_customer):
         """
-        :param type_user: 0 or 1, 0 is customer, 1 is staff
+        :param type_user: type_customer or type_staff
         :param user: user need to check
         :return: True if user existed, else False
         """
         cursor = self.func
-        if type_user == 0:
+        if type_user == config_flag.type_customer:
             cursor.execute('exec CheckExistedCustomerUser ?', user)
         else:
             cursor.execute('exec CheckExistedStaffUser ?', user)
@@ -120,10 +123,10 @@ class SqlFunction:
 
     def change_password_staff(self, user, old_pass, new_pass):
         try:
-            if self.check_existed_user(user, 1):
+            if self.check_existed_user(user, config_flag.type_staff):
                 current_pass = self.get_current_staff_password(user)
-                if ef.hash_password(old_pass) == current_pass:
-                    return self.reset_password_staff(user, ef.hash_password(new_pass))
+                if extra_function.hash_password(old_pass) == current_pass:
+                    return self.reset_password_staff(user, extra_function.hash_password(new_pass))
                 else:
                     return False
             else:
@@ -157,10 +160,10 @@ class SqlFunction:
 
     def change_password_customer(self, user, old_pass, new_pass):
         try:
-            if self.check_existed_user(user, 0):
+            if self.check_existed_user(user, config_flag.type_customer):
                 current_pass = self.get_current_customer_password(user)
-                if ef.hash_password(old_pass) == current_pass:
-                    return self.reset_password_customer(user, ef.hash_password(new_pass))
+                if extra_function.hash_password(old_pass) == current_pass:
+                    return self.reset_password_customer(user, extra_function.hash_password(new_pass))
                 else:
                     return False
             else:
@@ -236,7 +239,7 @@ class SqlFunction:
     def check_login_staff(self, username, password):
         try:
             cursor = self.func
-            cursor.execute("select dbo.CheckLoginStaff(?, ?)", username, ef.hash_password(password))
+            cursor.execute("select dbo.CheckLoginStaff(?, ?)", username, extra_function.hash_password(password))
             ans = 0
             for r in cursor:
                 ans = r[0]
@@ -253,7 +256,7 @@ class SqlFunction:
     def check_login_customer(self, username, password):
         try:
             cursor = self.func
-            cursor.execute("select dbo.CheckLoginCustomer(?, ?)", username, ef.hash_password(password))
+            cursor.execute("select dbo.CheckLoginCustomer(?, ?)", username, extra_function.hash_password(password))
             ans = 0
             for r in cursor:
                 ans = r[0]
@@ -443,6 +446,15 @@ class SqlFunction:
         except Exception as ex:
             print(ex)
             return False
+
+    def get_history_order_customer(self, customer_id):
+        # not complete
+        # try:
+        #     cursor = self.func
+        #     cursor.execute("select * from GetListHistoryOrderCustomer(?)", customer_id)
+        #     for row in cursor:
+        #         r = row[0]
+        pass
 
 
 # Test Function

@@ -2,8 +2,10 @@ from flask import Flask, jsonify, request, send_file
 from flask_cors import CORS
 import MainAPI.ConnectSQL
 import OtherFunctions.ExtraFunction
+import Configuration.ConfigFlag
 
 
+config_flag = Configuration.ConfigFlag
 extra_function = OtherFunctions.ExtraFunction
 connect = MainAPI.ConnectSQL.SqlFunction()
 app = Flask(__name__)
@@ -162,12 +164,12 @@ def login_staff():
             list_staff = connect.get_list_staff()
             for staff in list_staff:
                 if staff['username'] == username:
-                    data = {'result': True, 'info': staff}
+                    data = {'result': True, 'info': staff, 'message': 'Đăng nhập thành công'}
                     return jsonify(data)
-        return jsonify({'result': False, 'info': 'Sai tên đăng nhập hoặc mật khẩu'})
+        return jsonify({'result': False, 'info': None, 'message': 'Sai tên đăng nhập hoặc mật khẩu'})
     except Exception as ex:
         print(ex)
-        return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
+        return jsonify({'result': False, 'info': None, 'message': 'Có lỗi xảy ra'})
 
 
 @app.route("/staff/change-password", methods=['POST'])
@@ -237,12 +239,12 @@ def login_customer():
             list_customer = connect.get_list_customer()
             for customer in list_customer:
                 if customer['username'] == username:
-                    data = {'result': True, 'info': customer}
+                    data = {'result': True, 'info': customer, 'message': 'Đăng nhập thành công'}
                     return jsonify(data)
-        return jsonify({'result': False, 'info': 'Sai tên đăng nhập hoặc mật khẩu'})
+        return jsonify({'result': False, 'info': None, 'message': 'Sai tên đăng nhập hoặc mật khẩu'})
     except Exception as ex:
         print(ex)
-        return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
+        return jsonify({'result': False, 'info': None, 'message': 'Có lỗi xảy ra'})
 
 
 @app.route("/customer/show-info/<string:customer_id>")
@@ -275,14 +277,29 @@ def change_password_customer():
 
 @app.route("/customer/send-verify-reset-password", methods=['POST'])
 def send_verify_reset_password():
-    # not complete
     try:
         email = request.json['email']
         username = request.json['username']
         if connect.get_customer_email_by_username(username) == email:
-            pass
+            verify_number = extra_function.send_mail(email, config_flag.signal_message_reset_password)
+            data = {'email': email, 'verify_number': verify_number}
+            return jsonify({'result': True, 'info': 'Chuyển sang trang xác thực', 'data': data})
         else:
-            return jsonify({'result': False, 'info': 'Sai email hoặc tài khoản'})
+            return jsonify({'result': False, 'info': 'Sai email hoặc tài khoản', 'data': None})
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'info': 'Có lỗi xảy ra', 'data': None})
+
+
+@app.route("/customer/check-verify-reset-password", methods=['POST'])
+def check_verify_reset_password():
+    try:
+        verify_number_input = request.json['verify_number_input']
+        verify_number_session = request.json['verify_number_session']
+        if verify_number_session == verify_number_input:
+            return jsonify({'result': True, 'info': 'Mã xác thực đúng'})
+        else:
+            return jsonify({'result': False, 'info': 'Mã xác thực sai'})
     except Exception as ex:
         print(ex)
         return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
@@ -290,9 +307,9 @@ def send_verify_reset_password():
 
 @app.route("/customer/reset-password", methods=['POST'])
 def reset_password_customer():
-    user_name = request.form["username"]
-    password = request.form["password"]
-    if connect.reset_password_customer(user_name, password):
+    user_name = request.json["username"]
+    password = request.json["password"]
+    if connect.reset_password_customer(user_name, extra_function.hash_password(password)):
         return jsonify({'result': True, 'info': 'Đổi mật khẩu thành công'})
     return jsonify({'result': False, 'info': 'Đổi mật khẩu thất bại'})
 
@@ -313,37 +330,42 @@ def register_customer():
         # If insert success =>> new customer
         if connect.insert_customer(first_name, last_name, gender, identity_card, email, phone_num, dob,
                                    address, username, password):
-            list_customer = connect.get_list_customer()
-            send_verify_for_new_account(email)
-            for customer in list_customer:
-                if customer['username'] == username:
-                    data = {'result': True, 'info': customer}
-                    return jsonify(data)
+            # list_customer = connect.get_list_customer()
+            # for customer in list_customer:
+            #     if customer['username'] == username:
+            #         data = {'result': True, 'info': customer}
+            #         return jsonify(data)
+            verify_number = extra_function.send_mail(email, config_flag.signal_message_active_account)
+            active_account = {'email': email, 'verify_number': verify_number}
+            data = {'result': True, 'message': 'Đăng ký thành công', 'info': active_account}
+            return jsonify(data)
         else:
             data = {}
             list_customer = connect.get_list_customer()
             for customer in list_customer:
                 if customer['phone_num'] == phone_num:
                     data['result'] = False
-                    data['info'] = 'Số điện thoại đã được sử dụng'
+                    data['message'] = 'Số điện thoại đã được sử dụng'
+                    data['info'] = None
                     return jsonify(data)
                 if customer['email'] == email:
                     data['result'] = False
-                    data['info'] = 'Email đã được sử dụng'
+                    data['message'] = 'Email đã được sử dụng'
+                    data['info'] = None
                     return jsonify(data)
-            return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
+            return jsonify({'result': False, 'message': 'Có lỗi xảy ra', 'info': None})
     except Exception as ex:
         print(ex)
-        return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
-    return jsonify({'result': False, 'info': 'Đăng kí thất bại'})
+        return jsonify({'result': False, 'message': 'Đăng kí thất bại', 'info': None})
 
 
 @app.route("/customer/active-account", methods=['POST'])
 def active_customer_account():
     try:
         email = request.json['email']
-        verify_number_request = request.json['verify_number']
-        if verify_number_request == verify:
+        verify_number_input = request.json['verify_number_input']
+        verify_number_session = request.json['verify_number_session']
+        if verify_number_session == verify_number_input:
             connect.active_customer(email)
             return jsonify({'result': True, 'info': 'Xác thực tài khoản thành công'})
         return jsonify({'result': True, 'info': 'Xác thực tài khoản thất bại'})
