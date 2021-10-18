@@ -3,10 +3,12 @@ import hashlib
 import smtplib
 import ssl
 import random
+import Configuration.ConfigFlag
+config_flag = Configuration.ConfigFlag
 
 
 def hash_password(password):
-    my_key = 'guess_key'
+    my_key = config_flag.secret_pattern_of_text
     db_password = password + my_key
     new_pass = hashlib.md5(db_password.encode())
     return new_pass.hexdigest()
@@ -80,7 +82,7 @@ def send_mail(receiver_mail_account, type_message):
         verify_number = random.randint(100000, 999999)
         print(verify_number)
 
-        if type_message == 0:
+        if type_message == config_flag.signal_message_active_account:
             message = message_active_account(verify_number)
         else:
             message = message_reset_password(verify_number)
