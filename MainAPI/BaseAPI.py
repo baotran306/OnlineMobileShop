@@ -25,9 +25,28 @@ def insert_phone_type():
         return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
 
 
+@app.route("/admin/insert-phone-color", methods=['POST'])
+def insert_phone_color():
+    try:
+        color = request.json['color']
+        if connect.insert_phone_color(color):
+            data = {'result': True, 'info': 'Thêm thành công'}
+            return jsonify(data)
+        return jsonify({'result': False, 'info': 'Thêm thất bại'})
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
+
+
 @app.route("/admin/get-list-phone-type", methods=['GET'])
 def get_list_phone_type():
     list_phone_type = connect.get_list_phone_type()
+    return jsonify(list_phone_type)
+
+
+@app.route("/admin/get-list-phone-color", methods=['GET'])
+def get_list_phone_color():
+    list_phone_type = connect.get_list_phone_color()
     return jsonify(list_phone_type)
 
 
@@ -392,6 +411,17 @@ def insert_customer_order():
     except Exception as ex:
         print(ex)
         return jsonify({'result': False, 'info': 'Đặt hàng thất bại'})
+
+
+@app.route("/customer/check-history-order", methods=['POST'])
+def get_list_history_customer_order():
+    try:
+        customer_id = request.json['customer_id']
+        data = connect.get_list_history_order_customer(customer_id)
+        return jsonify({'result': True, 'info': data, 'message': 'Lấy danh sách mua hàng thành công'})
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'info': [], 'message': 'Có lỗi xảy ra'})
 
 
 @app.route("/staff/update-order", methods=['POST'])

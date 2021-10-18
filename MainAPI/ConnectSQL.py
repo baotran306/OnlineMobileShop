@@ -5,7 +5,6 @@ import Configuration.ConfigFlag
 config_flag = Configuration.ConfigFlag
 extra_function = OtherFunctions.ExtraFunction
 
-
 connect = pyodbc.connect(
     "Driver={SQL Server Native Client 11.0};"
     "Server=WINDOWS-A251ALV;"
@@ -318,6 +317,16 @@ class SqlFunction:
             print(ex)
             return False
 
+    def insert_phone_color(self, color):
+        try:
+            cursor = self.func
+            cursor.execute("exec InsertPhoneColor ?", color)
+            cursor.commit()
+            return True
+        except Exception as ex:
+            print(ex)
+            return False
+
     def get_list_phone(self):
         try:
             cursor = self.func
@@ -326,7 +335,7 @@ class SqlFunction:
             for r in cursor:
                 temp = {'id': r[0], 'phone_name': r[1], 'phone_type': r[2],
                         'type_phone_name': r[3], 'phone_description': r[4], 'quantity': r[5],
-                        'img': r[6], 'color': r[7], 'price': float(r[8])}
+                        'img': r[6], 'id_color': r[7], 'color': r[8], 'price': float(r[9])}
                 ans.append(temp)
             cursor.commit()
             return ans
@@ -341,6 +350,19 @@ class SqlFunction:
             ans = []
             for r in cursor:
                 ans.append({'id': r[0], 'type_phone_name': r[1]})
+            cursor.commit()
+            return ans
+        except Exception as ex:
+            print(ex)
+            return []
+
+    def get_list_phone_color(self):
+        try:
+            cursor = self.func
+            cursor.execute('select * from GetListPhoneColor()')
+            ans = []
+            for r in cursor:
+                ans.append({'id': r[0], 'phone_color': r[1]})
             cursor.commit()
             return ans
         except Exception as ex:
@@ -447,14 +469,61 @@ class SqlFunction:
             print(ex)
             return False
 
-    def get_history_order_customer(self, customer_id):
-        # not complete
-        # try:
-        #     cursor = self.func
-        #     cursor.execute("select * from GetListHistoryOrderCustomer(?)", customer_id)
-        #     for row in cursor:
-        #         r = row[0]
-        pass
+    def get_list_history_order_customer(self, customer_id):
+        try:
+            cursor = self.func
+            cursor.execute("select * from GetListHistoryCustomerOrder(?)", customer_id)
+            data = []
+            for row in cursor:
+                data.append({'id_order': row[0], 'created_date': str(row[1]), 'status_id': row[2],
+                             'status_name': row[3], 'phone_id': row[4], 'phone_name': row[5],
+                             'quantity': row[6], 'price': float(row[7])})
+            cursor.commit()
+            if len(data) == 0:
+                return []
+            if len(data) == 1:
+                return [{'id_order': data[-1]['id_order'],
+                         'created_date': str(data[-1]['created_date']),
+                         'status_id': data[-1]['status_id'],
+                         'status_name': data[-1]['status_name'],
+                         'list_order': [{'phone_id': data[-1]['phone_id'], 'phone_name': data[-1]['phone_name'],
+                                         'quantity': data[-1]['quantity'], 'price': float(data[-1]['price'])}]}]
+
+            history_data = []
+            list_order_detail = []
+            for i in range(len(data) - 1):
+                if data[i]['id_order'] == data[i + 1]['id_order']:
+                    list_order_detail.append({'phone_id': data[i]['phone_id'], 'phone_name': data[i]['phone_name'],
+                                              'quantity': data[i]['quantity'], 'price': float(data[i]['price'])})
+                    if i == len(data) - 2:
+                        list_order_detail.append({'phone_id': data[-1]['phone_id'],
+                                                  'phone_name': data[-1]['phone_name'],
+                                                  'quantity': data[-1]['quantity'], 'price': float(data[-1]['price'])})
+                        history_data.append({'id_order': data[i]['id_order'],
+                                             'created_date': str(data[i]['created_date']),
+                                             'status_id': data[i]['status_id'],
+                                             'status_name': data[i]['status_name'],
+                                             'list_order': list_order_detail})
+                else:
+                    list_order_detail.append({'phone_id': data[i]['phone_id'], 'phone_name': data[i]['phone_name'],
+                                              'quantity': data[i]['quantity'], 'price': float(data[i]['price'])})
+                    history_data.append({'id_order': data[i]['id_order'],
+                                         'created_date': str(data[i]['created_date']),
+                                         'status_id': data[i]['status_id'],
+                                         'status_name': data[i]['status_name'],
+                                         'list_order': list_order_detail})
+                    if i == len(data) - 2:
+                        list_order_detail = [{'phone_id': data[-1]['phone_id'], 'phone_name': data[-1]['phone_name'],
+                                              'quantity': data[-1]['quantity'], 'price': float(data[-1]['price'])}]
+                        history_data.append({'id_order': data[-1]['id_order'],
+                                             'created_date': str(data[-1]['created_date']),
+                                             'status_id': data[-1]['status_id'],
+                                             'status_name': data[-1]['status_name'],
+                                             'list_order': list_order_detail})
+            return history_data
+        except Exception as ex:
+            print(ex)
+            return []
 
 
 # Test Function
