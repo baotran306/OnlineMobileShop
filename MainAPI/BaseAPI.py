@@ -232,7 +232,7 @@ def change_info_person():
         identity_card = request.json['identity_card']
         email = request.json['email']
         phone_num = request.json['phone_num']
-        dob = request.json['date_of_birth']
+        dob = request.json['day_of_birth']
         address = request.json['address']
         id_person = request.json['id_customer']
         if connect.update_info(first_name, last_name, gender, identity_card, email, phone_num, dob, address, id_person):
