@@ -395,7 +395,7 @@ def active_customer_account():
         if verify_number_session == verify_number_input:
             connect.active_customer(email)
             return jsonify({'result': True, 'info': 'Xác thực tài khoản thành công'})
-        return jsonify({'result': True, 'info': 'Xác thực tài khoản thất bại'})
+        return jsonify({'result': False, 'info': 'Xác thực tài khoản thất bại'})
     except Exception as ex:
         print(ex)
         return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
