@@ -472,58 +472,86 @@ class SqlFunction:
     def get_list_history_order_customer(self, customer_id):
         try:
             cursor = self.func
-            cursor.execute("select * from GetListHistoryCustomerOrder(?)", customer_id)
+            cursor.execute("select * from GetListHistoryCustomerOrder(?) order by id", customer_id)
             data = []
             for row in cursor:
                 data.append({'id_order': row[0], 'created_date': str(row[1]), 'status_id': row[2],
-                             'status_name': row[3], 'phone_id': row[4], 'phone_name': row[5],
-                             'quantity': row[6], 'price': float(row[7])})
+                             'status_name': row[3], 'phone_id': row[4], 'phone_name': row[5], 'image': row[6],
+                             'quantity': row[7], 'price': float(row[8])})
             cursor.commit()
-            if len(data) == 0:
-                return []
-            if len(data) == 1:
-                return [{'id_order': data[-1]['id_order'],
-                         'created_date': str(data[-1]['created_date']),
-                         'status_id': data[-1]['status_id'],
-                         'status_name': data[-1]['status_name'],
-                         'list_order': [{'phone_id': data[-1]['phone_id'], 'phone_name': data[-1]['phone_name'],
-                                         'quantity': data[-1]['quantity'], 'price': float(data[-1]['price'])}]}]
+            data_output = format_list_history_order_customer(data)
+            return data_output
 
-            history_data = []
-            list_order_detail = []
-            for i in range(len(data) - 1):
-                if data[i]['id_order'] == data[i + 1]['id_order']:
-                    list_order_detail.append({'phone_id': data[i]['phone_id'], 'phone_name': data[i]['phone_name'],
-                                              'quantity': data[i]['quantity'], 'price': float(data[i]['price'])})
-                    if i == len(data) - 2:
-                        list_order_detail.append({'phone_id': data[-1]['phone_id'],
-                                                  'phone_name': data[-1]['phone_name'],
-                                                  'quantity': data[-1]['quantity'], 'price': float(data[-1]['price'])})
-                        history_data.append({'id_order': data[i]['id_order'],
-                                             'created_date': str(data[i]['created_date']),
-                                             'status_id': data[i]['status_id'],
-                                             'status_name': data[i]['status_name'],
-                                             'list_order': list_order_detail})
-                else:
-                    list_order_detail.append({'phone_id': data[i]['phone_id'], 'phone_name': data[i]['phone_name'],
-                                              'quantity': data[i]['quantity'], 'price': float(data[i]['price'])})
-                    history_data.append({'id_order': data[i]['id_order'],
-                                         'created_date': str(data[i]['created_date']),
-                                         'status_id': data[i]['status_id'],
-                                         'status_name': data[i]['status_name'],
-                                         'list_order': list_order_detail})
-                    if i == len(data) - 2:
-                        list_order_detail = [{'phone_id': data[-1]['phone_id'], 'phone_name': data[-1]['phone_name'],
-                                              'quantity': data[-1]['quantity'], 'price': float(data[-1]['price'])}]
-                        history_data.append({'id_order': data[-1]['id_order'],
-                                             'created_date': str(data[-1]['created_date']),
-                                             'status_id': data[-1]['status_id'],
-                                             'status_name': data[-1]['status_name'],
-                                             'list_order': list_order_detail})
-            return history_data
         except Exception as ex:
             print(ex)
             return []
+
+    def get_list_all_order_customer(self, from_date, to_date):
+        try:
+            cursor = self.func
+            cursor.execute("select * from dbo.GetListAllOrder(?, ?) order by id", from_date, to_date)
+            data = []
+            for row in cursor:
+                data.append({'id_order': row[0], 'created_date': str(row[1]), 'status_id': row[2],
+                             'status_name': row[3], 'phone_id': row[4], 'phone_name': row[5], 'image': row[6],
+                             'quantity': row[7], 'price': float(row[8])})
+            cursor.commit()
+            output_report = format_list_history_order_customer(data)
+            return output_report
+        except Exception as ex:
+            print(ex)
+            return []
+
+
+def format_list_history_order_customer(list_data):
+    if len(list_data) == 0:
+        return []
+    if len(list_data) == 1:
+        return [{'id_order': list_data[-1]['id_order'],
+                 'created_date': str(list_data[-1]['created_date']),
+                 'status_id': list_data[-1]['status_id'],
+                 'status_name': list_data[-1]['status_name'],
+                 'list_order': [{'phone_id': list_data[-1]['phone_id'], 'phone_name': list_data[-1]['phone_name'],
+                                 'image': list_data[-1]['image'], 'quantity': list_data[-1]['quantity'],
+                                 'price': float(list_data[-1]['price'])}]}]
+
+    history_data = []
+    list_order_detail = []
+    for i in range(len(list_data) - 1):
+        if list_data[i]['id_order'] == list_data[i + 1]['id_order']:
+            list_order_detail.append({'phone_id': list_data[i]['phone_id'], 'phone_name': list_data[i]['phone_name'],
+                                      'image': list_data[i]['image'],
+                                      'quantity': list_data[i]['quantity'], 'price': float(list_data[i]['price'])})
+            if i == len(list_data) - 2:
+                list_order_detail.append({'phone_id': list_data[-1]['phone_id'],
+                                          'phone_name': list_data[-1]['phone_name'], 'image': list_data[-1]['image'],
+                                          'quantity': list_data[-1]['quantity'], 'price': float(list_data[-1]['price'])})
+                history_data.append({'id_order': list_data[i]['id_order'],
+                                     'created_date': str(list_data[i]['created_date']),
+                                     'status_id': list_data[i]['status_id'],
+                                     'status_name': list_data[i]['status_name'],
+                                     'list_order': list_order_detail})
+        else:
+            list_order_detail.append({'phone_id': list_data[i]['phone_id'], 'phone_name': list_data[i]['phone_name'],
+                                      'image': list_data[i]['image'], 'quantity': list_data[i]['quantity'],
+                                      'price': float(list_data[i]['price'])})
+            history_data.append({'id_order': list_data[i]['id_order'],
+                                 'created_date': str(list_data[i]['created_date']),
+                                 'status_id': list_data[i]['status_id'],
+                                 'status_name': list_data[i]['status_name'],
+                                 'list_order': list_order_detail})
+            list_order_detail = []
+            if i == len(list_data) - 2:
+                list_order_detail = [{'phone_id': list_data[-1]['phone_id'], 'phone_name': list_data[-1]['phone_name'],
+                                      'image': list_data[-1]['image'], 'quantity': list_data[-1]['quantity'],
+                                      'price': float(list_data[-1]['price'])}]
+                history_data.append({'id_order': list_data[-1]['id_order'],
+                                     'created_date': str(list_data[-1]['created_date']),
+                                     'status_id': list_data[-1]['status_id'],
+                                     'status_name': list_data[-1]['status_name'],
+                                     'list_order': list_order_detail})
+
+    return history_data
 
 
 # Test Function
@@ -553,4 +581,5 @@ sql_connect = SqlFunction()
 # print(sql_connect.update_info('Ngọc', 'Phạm Thị Bích', 'Nữ', '123827389', 'ngocngungoc@gmail.com', '0922132221',
 #                               '2003-04-09', 'Thái Bình', 'CUSTOMER_7'))
 # print(sql_connect.update_staff(3, 2500000, 'STAFF_3'))
+# sql_connect.get_list_all_order_customer('2021-07-01', '2021-12-12')
 # print(sql_connect.get_list_role())

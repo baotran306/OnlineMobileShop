@@ -95,6 +95,14 @@ def get_list_phone():
     return jsonify(list_phone)
 
 
+@app.route("/admin/get-list-all-customer-order-by-date", methods=['POST'])
+def get_list_all_customer_order_by_date():
+    from_date = request.json['from_date']
+    to_date = request.json['to_date']
+    data = connect.get_list_all_order_customer(from_date, to_date)
+    return jsonify(data)
+
+
 @app.route("/admin/list-staff", methods=['GET'])
 def get_list_staff():
 
@@ -413,10 +421,10 @@ def insert_customer_order():
         return jsonify({'result': False, 'info': 'Đặt hàng thất bại'})
 
 
-@app.route("/customer/check-history-order", methods=['POST'])
-def get_list_history_customer_order():
+@app.route("/customer/check-history-order/<string:customer_id>", methods=['GET'])
+def get_list_history_customer_order(customer_id):
     try:
-        customer_id = request.json['customer_id']
+        # customer_id = request.json['customer_id']
         data = connect.get_list_history_order_customer(customer_id)
         return jsonify({'result': True, 'info': data, 'message': 'Lấy danh sách mua hàng thành công'})
     except Exception as ex:
