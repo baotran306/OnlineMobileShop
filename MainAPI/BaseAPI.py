@@ -364,7 +364,7 @@ def register_customer():
             #         return jsonify(data)
             verify_number = extra_function.send_mail(email, config_flag.signal_message_active_account)
             active_account = {'email': email, 'verify_number': verify_number}
-            data = {'result': True, 'message': 'Đăng ký thành công', 'info': active_account}
+            data = {'result': True, 'info': 'Đăng ký thành công', 'data': active_account}
             return jsonify(data)
         else:
             data = {}
@@ -372,18 +372,18 @@ def register_customer():
             for customer in list_customer:
                 if customer['phone_num'] == phone_num:
                     data['result'] = False
-                    data['message'] = 'Số điện thoại đã được sử dụng'
-                    data['info'] = None
+                    data['info'] = 'Số điện thoại đã được sử dụng'
+                    data['data'] = None
                     return jsonify(data)
                 if customer['email'] == email:
                     data['result'] = False
-                    data['message'] = 'Email đã được sử dụng'
-                    data['info'] = None
+                    data['info'] = 'Email đã được sử dụng'
+                    data['data'] = None
                     return jsonify(data)
-            return jsonify({'result': False, 'message': 'Có lỗi xảy ra', 'info': None})
+            return jsonify({'result': False, 'info': 'Có lỗi xảy ra', 'data': None})
     except Exception as ex:
         print(ex)
-        return jsonify({'result': False, 'message': 'Đăng kí thất bại', 'info': None})
+        return jsonify({'result': False, 'info': 'Đăng kí thất bại', 'data': None})
 
 
 @app.route("/customer/active-account", methods=['POST'])
