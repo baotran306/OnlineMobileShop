@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/aaa.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/backgroudciruspeel.xml" value="0.14270833333333333" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/background_isselected.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/bar_coloer.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/bar_color.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/btn1.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/button_order.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/color_menubar.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/custom_button_myorder.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/custom_input.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/customer_textinformation.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic__home.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_baseline_menu.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.14739583333333334" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_calendar24.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_category.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_email.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_error.xml" value="0.14739583333333334" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_home_1_background.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_phone_menu.xml" value="0.1546875" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_store_24.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/ic_users.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/image_myorder.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/notifycation.xml" value="0.1125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/outline_home_24.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/screen_topdow.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/scrim.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/shadow_background.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/shadow_left.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/shadow_left_panel.xml" value="0.26614583333333336" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/shadow_login.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/shadow_login_panel.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/shadow_right_panel.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/drawable/tesst.xml" value="0.2703125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/font/aclonica.xml" value="0.284375" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/action_bar_notifycation_icon.xml" value="0.8" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_active_account.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_cart.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_change_location_and_info.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_choose_location.xml" value="0.13246396705559368" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_get_location.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_home.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_information.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_location.xml" value="0.1875" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_login.xml" value="0.2" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_menu_phone.xml" value="0.25" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_otp.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_payment.xml" value="0.1897644927536232" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_phone.xml" value="0.25" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_profile.xml" value="0.23822463768115942" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_registaccount.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_register.xml" value="0.4" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_registerinformation.xml" value="0.25" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_state_order.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/activity_statr_order.xml" value="0.22418478260869565" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/appbar.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/back_toolbar.xml" value="0.25" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/brands_multiselect.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/cardview_item_phone.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_activity_state_order.xml" value="0.23125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_cancelled.xml" value="0.21965579710144928" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_city.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_delivered.xml" value="0.21965579710144928" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_districts.xml" value="0.17527173913043478" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_fragmetn_process.xml" value="0.21965579710144928" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_fragmetn_waiforpay.xml" value="0.21965579710144928" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_transport.xml" value="0.21965579710144928" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/fragment_wards.xml" value="0.17527173913043478" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/header.xml" value="0.4" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/item_addcart.xml" value="0.4" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/item_myorder.xml" value="0.4" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/itemlocation.xml" value="0.264" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/list_brands.xml" value="0.24728260869565216" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/menu_main.xml" value="0.1203125" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/nav_header_filter.xml" value="0.23854166666666668" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/toolbar_bottom.xml" value="0.25" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/layout/topdown_information.xml" value="0.13854166666666667" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/menu/main_menu.xml" value="0.25" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/menu/menu_information_store.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/menu/menu_phone_active.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/menu/menu_store.xml" value="0.25416666666666665" />
+        <entry key="..\:/Thang/phoneStore/app/src/main/res/menu/sort_menu.xml" value="0.25416666666666665" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.264" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

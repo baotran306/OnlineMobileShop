@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "564449128744",
+    "project_id": "phonestore-6f87f",
+    "storage_bucket": "phonestore-6f87f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:564449128744:android:a9c51b4119c03dade7a01d",
+        "android_client_info": {
+          "package_name": "com.example.phonestore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "564449128744-oh3uc005faiikc4er06qtv5fbu16mrsd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.phonestore",
+            "certificate_hash": "d42e216eb6c0b4657b36d0d84d87a78f9ce06cbd"
+          }
+        },
+        {
+          "client_id": "564449128744-ssqp59ucu5rgeihtf1cv1l92la2ockf6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFT9oODRpUh6uIFcJiGZP9jlUo4b0O1OQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "564449128744-ssqp59ucu5rgeihtf1cv1l92la2ockf6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

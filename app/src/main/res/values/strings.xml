@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name"></string>
+    <string name="actionhome">home</string>
+    <string name="actioninformation">information</string>
+    <string name="actioncategory">category</string>
+    <string name="title_activity_state_order">activityStateOrderActivity</string>
+    <string name="tab_text_1">Tab 1</string>
+    <string name="tab_text_2">Tab 2</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

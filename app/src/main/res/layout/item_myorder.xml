@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:layout_marginTop="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:layout_marginTop="5dp"
+        android:id="@+id/imageViewMyOrder"
+        app:circularflow_defaultRadius="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:id="@+id/informationItem_myOrder_id"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:gravity="center|left"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewMyOrder"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/priceMyorder_id"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="500 đ"
+        android:textSize="16dp"
+        android:textColor="@color/textColorBlue"
+        android:textAlignment="center"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/informationItem_myOrder_id" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceMyorder_id">
+
+        <Button
+            android:id="@+id/btn_details_id"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_weight="1"
+            android:background="@drawable/custom_button_myorder"
+            android:text="Details" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

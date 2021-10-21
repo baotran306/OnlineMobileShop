@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@drawable/bar_color"
+    android:id="@+id/myToolBar"
+    android:theme="?attr/actionBarTheme"
+    app:layout_collapseMode="pin">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/bar_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/textEditSearch"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:layout_weight="15"
+            android:background="@drawable/custom_input"
+            android:drawableStart="@drawable/search_icon"
+            android:hint="phone"
+            android:inputType="textFilter"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/dark_gray"
+            app:layout_constraintEnd_toStartOf="@+id/include"
+            app:layout_constraintStart_toStartOf="parent"
+            app:searchIcon="@drawable/search_icon" />
+
+        <include
+            android:id="@+id/include"
+            android:layout_marginTop="3dp"
+            layout="@layout/action_bar_notifycation_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.Toolbar>

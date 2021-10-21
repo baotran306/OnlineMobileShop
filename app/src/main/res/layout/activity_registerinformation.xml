@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".login.activityRegistInformation">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="215dp"
+        android:layout_height="600dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/shadow_right_panel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"></RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/shadow_login_panel"
+        android:orientation="vertical"
+        android:paddingLeft="50dp"
+        android:paddingTop="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.194"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutFirstName_regist"
+            style="@style/textBoxDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_error">
+
+            <EditText
+                android:id="@+id/firstName_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_name"
+                android:ems="10"
+                android:hint="First name"
+                android:inputType="textPersonName"
+                android:padding="12dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutLastName_regist"
+            style="@style/textBoxDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="true"
+            app:errorIconDrawable="@drawable/ic_error">
+
+            <EditText
+                android:id="@+id/lastName_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_name"
+                android:ems="10"
+                android:hint="Last name"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutEmail_regist"
+            style="@style/textBoxDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@drawable/ic_error"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/textEmail_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_email"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutDayOfBirth_regist"
+            style="@style/textBoxDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@drawable/ic_error"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/textDateOfBirth_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_calendar24"
+                android:ems="10"
+                android:hint="Date of birth"
+                android:inputType="date"
+                android:padding="12dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutPhone_regist"
+            style="@style/textBoxDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@drawable/ic_error"
+            app:counterEnabled="true"
+            app:counterMaxLength="10"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/textPhoneNumber_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_phone"
+                android:ems="10"
+                android:maxLength="11"
+                android:hint="Phone number"
+                android:inputType="phone"
+                android:padding="12dp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutIdCard_regist"
+            style="@style/textBoxDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@drawable/ic_error"
+            app:counterEnabled="true"
+            app:counterMaxLength="9"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/textIdCard_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/id_card"
+                android:ems="10"
+                android:hint="identity card"
+                android:inputType="number"
+                android:maxLength="9"
+                android:padding="12dp"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutAddress_regist"
+            style="@style/textBoxDesign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorIconDrawable="@drawable/ic_error"
+            app:errorEnabled="true">
+
+            <EditText
+                android:id="@+id/textAddress_regist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:drawableEnd="@drawable/ic_pin"
+                android:ems="10"
+                android:hint="Address"
+                android:inputType="textPersonName"
+                android:padding="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/TextPhoneNumber_Regist"
+                tools:ignore="TouchTargetSizeCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <RadioGroup
+            android:id="@+id/radioSexual_Regist"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textDateOfBirth">
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="91dp"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Sexual" />
+
+            <RadioButton
+                android:id="@+id/radioMale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Male" />
+
+            <RadioButton
+                android:id="@+id/radioFemale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="FeMale" />
+        </RadioGroup>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:fontFamily="@font/aclonica"
+        android:text="Register"
+        android:textColor="@color/design_default_color_error"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/buttonNext_Regist"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Next"
+        android:background="@drawable/btn1"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout" />
+
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/textLoginRegist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="300dp"
+        android:textColor="@color/black"
+        android:text="Login"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="7dp" />
+    <TextView
+        android:textSize="20dp"
+        android:id="@+id/textRegist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="250dp"
+        android:layout_marginRight="40dp"
+        android:gravity="right"
+        android:textColor="@color/red"
+        android:text="Sign Up"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout"
+        tools:layout_editor_absoluteX="7dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
