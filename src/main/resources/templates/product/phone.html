@@ -9,7 +9,6 @@
 <body>
 <div layout:fragment="content">
     <div class="container1">
-        <p th:text="${message}"/>
         <table>
             <br>
             <tr>
@@ -42,10 +41,12 @@
                             <tbody>
                             <tr class="tr-phone-style" th:each="tempPhone:${phones}">
                                 <td class="td-phone-name" th:text="${tempPhone.phoneName}"/>
-                                <td class="td-phone-image" th:text="${tempPhone.image}"/>
+                                <td class="td-phone-image">
+                                    <img th:src="'http://127.0.0.1:5000/get-image/'+${tempPhone.image}" th:width="200px" th:height="150px"/>
+                                </td>
                                 <td class="td-phone-brand" th:text="${tempPhone.brand}"/>
                                 <td class="td-phone-color" th:text="${tempPhone.color}"/>
-                                <td class="td-phone-price" th:text="${tempPhone.price}"/>
+                                <td class="td-phone-price"><span th:text="${#numbers.formatDecimal(tempPhone.price, 0, 'COMMA', 0, 'POINT')}"></span>VNĐ</td>
                                 <td class="td-phone-quantity" th:text="${tempPhone.quantity}"/>
                                 <td class="td-phone-description" th:text="${tempPhone.description}"/>
                                 <td class="td-phone-action">
