@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/main_layout}">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/brand-color-style.css">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-brand">
+        <div class="content-show">
+            <table>
+                <br>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="td-search-brand"><input type="text" class="text-search-brand"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="table-brand">
+                        <div>
+                            <table class="table table-bordered table-striped" id="table-product">
+                                <!-- build HTML table based on employees -->
+                                <thead class="table-dark">
+                                <tr class="tr-table-phone-title">
+                                    <th class="th-brand-name">Color</th>
+                                    <th class="th-action-brand">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="tr-phone-style">
+                                    <td class="td-brand-name">Red</td>
+                                    <td class="td-action-brand">
+                                        <a class="btn btn-primary btn-sm mb-3">Update</a>
+                                        <a href="#" class="btn btn-danger btn-sm mb-3">Delete</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="content-update">
+            <form action="/color" class="form-add-brand">
+                <table class="style-add-brand">
+                    <tr>
+                        <td>
+                            <div class="phone-container">
+                                <p>
+                                    <label><b>Color</b></label>
+                                    <input class="input-text-phone-style" type="text">
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="vertical-center">
+                    <button type="submit" class="btn-add">ADD</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

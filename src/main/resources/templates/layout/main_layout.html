@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head >
+    <meta charset="UTF-8">
+    <title>Phone store</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/main_style.css" type="text/css">
+</head>
+
+<body>
+    <div class="wrapper">
+        <aside class="aside-menu">
+            <div>
+                <nav class="menu">
+                    <ul>
+                        <li id="nav-1-home" class="nav-home"><a href="/index">home</a></li>
+                        <div class="dropdown-product">
+                            <li id="nav-2-product" class="nav-product"><a href="/phone">Product</a></li>
+                            <div class="dropdown-nav-product">
+                                <a href="/phone">Phone</a>
+                                <a href="/brand">Brand</a>
+                                <a href="/color">Color</a>
+                                <a href="#Phone">Order</a>
+                            </div>
+                        </div>
+                        <li id="nav-3-staff" class="nav-staff"><a href="#Staff">Staff</a></li>
+                        <li id="nav-4-customer" class="nav-customer"><a href="#Customer">Customer</a></li>
+                        <li id="nav-5-logout" class="nav-logout"><a href="#logout">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <article class="article-main">
+            <div class="container" layout:fragment="content">
+
+            </div>
+        </article>
+        <footer class="footer-main">
+            <p class="footer-email">Email: thangbaophonestore@gmail.com</p>
+            <p class="footer-phonenum">Phone Number: 0909603151</p>
+        </footer>
+
+    </div>
+
+
+</body>
+
+</html>

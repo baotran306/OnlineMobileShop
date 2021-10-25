@@ -1,0 +1,90 @@
+.td-search-phone {
+    width: 140vh;
+}
+
+.text-search {
+    width: 60vh;
+}
+.td-btn-add-phone{
+    width: 30vh;
+}
+
+.table-phone {
+    width: 150vh;
+}
+.th-phone-name{
+    width: 20vh;
+}
+.th-brand{
+    width: 20vh;
+}
+.th-color{
+    width: 15vh;
+}
+.th-image{
+    width: 30vh;
+}
+.th-quantity{
+    width: 15vh;
+}
+.th-price{
+    width: 15vh;
+}
+.th-description{
+    width: 40vh;
+}
+.th-action{
+    width: 20vh;
+}
+.tr-phone-style{
+    text-align: center;
+}
+.tr-table-phone-title{
+    text-align: center;
+}
+.td-phone-name{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+.td-phone-image{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+.td-phone-brand{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+.td-phone-color{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+.td-phone-quantity{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+.td-phone-price{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+.td-phone-description{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+.td-phone-action{
+    text-align: center;
+    align-content: center;
+    vertical-align: middle;
+}
+td{
+    word-break: break-all;
+}
+#btn-add-phone{
+    width: 15vh;
+}

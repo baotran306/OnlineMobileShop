@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/main_layout}">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/phone-style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container1">
+        <p th:text="${message}"/>
+        <table>
+            <br>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="td-search-phone"><input type="text" class="text-search"></td>
+                            <td><a class="btn btn-primary btn-sm mb-3" id="btn-add-phone" href="/uploadPhone">Add</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-phone">
+                    <div>
+                        <table class="table table-bordered table-striped" id="table-product">
+                            <!-- build HTML table based on employees -->
+                            <thead class="table-dark">
+                            <tr class="tr-table-phone-title">
+                                <th class="th-phone-name">Phone name</th>
+                                <th class="th-image">image</th>
+                                <th class="th-brand">Brand</th>
+                                <th class="th-color">Color</th>
+                                <th class="th-price">Price</th>
+                                <th class="th-quantity">Quantity</th>
+                                <th class="th-description">Description</th>
+                                <th class="th-action">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="tr-phone-style" th:each="tempPhone:${phones}">
+                                <td class="td-phone-name" th:text="${tempPhone.phoneName}"/>
+                                <td class="td-phone-image" th:text="${tempPhone.image}"/>
+                                <td class="td-phone-brand" th:text="${tempPhone.brand}"/>
+                                <td class="td-phone-color" th:text="${tempPhone.color}"/>
+                                <td class="td-phone-price" th:text="${tempPhone.price}"/>
+                                <td class="td-phone-quantity" th:text="${tempPhone.quantity}"/>
+                                <td class="td-phone-description" th:text="${tempPhone.description}"/>
+                                <td class="td-phone-action">
+                                    <a class="btn btn-primary btn-sm mb-3">Update</a>
+                                    <a href="#" class="btn btn-danger btn-sm mb-3">Delete</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

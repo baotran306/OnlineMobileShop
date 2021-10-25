@@ -1,0 +1,56 @@
+.container-brand {
+    display: grid;
+    margin-left: 50px;
+    height: 90vh;
+    grid-template-columns: 0.8fr 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: "content-show content-update";
+}
+
+.content-show {
+    background-color: white;
+    grid-area: content-show;
+}
+
+.content-update {
+    background-color: white;
+    grid-area: content-update;
+}
+
+.text-search-brand {
+    width: 400px;
+}
+
+.td-search-brand {
+    width: 100%;
+}
+
+.table-brand {
+    width: 100%;
+}
+
+.th-brand-name {
+    width: 350px;
+}
+
+table tr thead th {
+    text-align: center;
+}
+
+.td-brand-name {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.form-add-brand {
+    margin-top: 50px;
+    margin-left: 0px;
+}
+
+.style-add-brand {
+    width: 100%;
+}
+
+.btn-add {
+    margin-left: 150px;
+}
