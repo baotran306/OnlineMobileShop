@@ -20,18 +20,19 @@ footer {
     background-color: white;
     grid-area: footer;
 }
+.error{
+    color: red;
+}
 
 #content1 {
     grid-area: content1;
     background-color: white;
+    margin-left: 150px;
 }
 
 #content2 {
     background-color: white;
 }
-
-
-
 
 .img-style {
     width: 300px;
@@ -44,6 +45,69 @@ footer {
     box-sizing: border-box;
     width: 310px;
     height: 410px;
+}
+
+
+.phone-container small {
+    visibility: hidden;
+    position: absolute;
+    left: 0px;
+}
+
+.phone-container i {
+    visibility: hidden;
+    position: absolute;
+    top: 30px;
+    right: 100px;
+}
+
+.phone-container.error i.fa-exclamation-circle {
+    visibility: visible;
+    color: red;
+}
+
+.phone-container.error small {
+    visibility: visible;
+    color: red;
+}
+
+.phone-container.success i.fa-exclamation-circle {
+    visibility: hidden;
+}
+
+.phone-container.success small {
+    visibility: hidden;
+}
+
+.container-input-file i {
+    position: absolute;
+    visibility: hidden;
+    right: 5px;
+    bottom: 10px;
+}
+
+.container-input-file small {
+    position: absolute;
+    visibility: hidden;
+    left: 0px;
+    top: 30px;
+}
+.container-input-file.sucess i.fa-exclamation-circle {
+    visibility: hidden;
+}
+
+.container-input-file.success small {
+    visibility: hidden;
+}
+
+.container-input-file.error i.fa-exclamation-circle {
+    visibility: visible;
+    color: red;
+}
+
+.container-input-file.error small {
+    visibility: visible;
+    color: red;
 }
 
 .table-add-phone {
@@ -65,6 +129,7 @@ footer {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    position: relative;
     width: 100%;
 }
 
@@ -88,4 +153,19 @@ footer {
     margin: 0;
     position: absolute;
     left: 50%;
+}
+.phone-container.error input {
+    border-color: red;
+}
+
+.phone-container.error select {
+    border-color: red;
+}
+
+.phone-container.error textarea {
+    border-color: red;
+}
+
+.container-input-file.error input {
+    border-color: red;
 }

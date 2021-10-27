@@ -2,33 +2,32 @@ package com.example.phonestore.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Phone {
-    @JsonProperty("id")
-    private int id;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+public class PhonePost {
+
+    int id;
     @JsonProperty("phone_name")
+    @NotNull(message = "Phone name cannot be null")
     private String phoneName;
     @JsonProperty("color")
-    private String color;
-    @JsonProperty("type_phone_name")
-    private String brand;
-    @JsonProperty("img")
+    private int color;
+    @JsonProperty("phone_type")
+    private int brand;
+    @JsonProperty("image")
+    @NotNull(message = "image cannot be null")
     private String image;
     @JsonProperty("quantity")
+    @NotNull(message = "quantity cannot be null")
     private int quantity;
     @JsonProperty("price")
+    @NotNull(message = "price cannot be null")
     private Double price;
     @JsonProperty("phone_description")
     private  String description;
-    @JsonProperty("id_color")
-    private int idColor;
-    @JsonProperty("phone_type")
-    private int idBrand;
 
-    public Phone() {
-    }
-
-    public Phone(int id, String phoneName, String color, String brand, String image, int quantity, Double price, String description, int idColor, int idBrand) {
-        this.id = id;
+    public PhonePost(int id,String phoneName, int color, int brand, String image, int quantity, Double price, String description) {
         this.phoneName = phoneName;
         this.color = color;
         this.brand = brand;
@@ -36,34 +35,16 @@ public class Phone {
         this.quantity = quantity;
         this.price = price;
         this.description = description;
-        this.idColor = idColor;
-        this.idBrand = idBrand;
     }
 
-    public int getIdColor() {
-        return idColor;
+    public PhonePost() {
     }
-
-    public void setIdColor(int idColor) {
-        this.idColor = idColor;
+    public int getId(){
+        return this.id;
     }
-
-    public int getIdBrand() {
-        return idBrand;
+    public void setId(int id){
+        this.id=id;
     }
-
-    public void setIdBrand(int idBrand) {
-        this.idBrand = idBrand;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getPhoneName() {
         return phoneName;
     }
@@ -72,19 +53,19 @@ public class Phone {
         this.phoneName = phoneName;
     }
 
-    public String getColor() {
+    public int getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(int color) {
         this.color = color;
     }
 
-    public String getBrand() {
+    public int getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public void setBrand(int brand) {
         this.brand = brand;
     }
 
@@ -118,5 +99,18 @@ public class Phone {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "PhonePost{" +
+                " phoneName='" + phoneName + '\'' +
+                ", color=" + color +
+                ", brand=" + brand +
+                ", image='" + image + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

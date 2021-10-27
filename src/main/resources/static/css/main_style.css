@@ -40,10 +40,15 @@ nav li a {
     top: 80%;
     color: #fff;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
     text-decoration: none;
     display: block;
+    left: 0;
     text-align: left;
+    font-size: 14px;
+}
+.fas {
+    font-size: 14px;
 }
 
 .nav-home {
@@ -69,6 +74,9 @@ ul div div a {
     color: white;
     text-decoration: none;
     display: block;
+    text-align: left;
+    letter-spacing: 2px;
+    text-decoration: none;
 }
 
 .dropdown-product {
@@ -169,12 +177,13 @@ ul div div a {
 }
 .phone-container {
     display: block;
-    margin-left: 150px;
+    position: relative;
 }
 .input-text-phone-style {
     width: 50vh;
     min-height: 24px;
     display: block;
+    position: relative;
     border-radius: 2px 2px;
     border: 1px solid black;
 }

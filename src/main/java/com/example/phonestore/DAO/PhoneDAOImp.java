@@ -1,6 +1,6 @@
 package com.example.phonestore.DAO;
 
-import com.example.phonestore.object.Phone;
+import com.example.phonestore.object.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -27,5 +27,37 @@ public class PhoneDAOImp implements PhoneDAO {
         List<Phone> phones = response.block();
 
         return phones;
+    }
+
+    @Override
+    public List<Color> getListColor() {
+        Mono<List<Color>> response = client.get()
+                .uri("admin/get-list-phone-color")
+                .retrieve().bodyToMono(new ParameterizedTypeReference<List<Color>>() {
+                });
+        List<Color> colors = response.block();
+        return colors;
+    }
+
+    @Override
+    public List<Brand> getListBrand() {
+        Mono<List<Brand>> response = client.get()
+                .uri("admin/get-list-phone-type")
+                .retrieve().bodyToMono(new ParameterizedTypeReference<List<Brand>>() {
+                });
+        List<Brand> brands = response.block();
+        return brands;
+    }
+
+    @Override
+    public void savePhone(PhonePost phone) {
+        System.out.println(phone.toString());
+        Mono<ResponseMessage> response = client.post()
+                .uri("admin/insert-phone")
+                .body(Mono.just(phone),PhonePost.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage responseMessage = response.block();
+        System.out.println(responseMessage.toString());
     }
 }

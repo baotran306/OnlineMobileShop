@@ -1,13 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{layout/main_layout}">
 <head>
     <meta charset="UTF-8">
-    <link href="css/addphone-style.css" type="text/css" rel="stylesheet">
+    <link href="/css/addphone-style.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/jscript/error.js" th:src="@{/jscript/error.js}"></script>
+
 </head>
 <body>
     <div layout:fragment="content">
-        <form action="/phone">
+        <form id="form-upload-phone" class="form-add-phone" action="/admin/phone/save" th:object="${phone}" method="post" enctype="multipart/form-data">
             <div class="container-add-phone">
                 <header><b>UPLOAD</b></header>
                 <div id="content1">
@@ -16,7 +20,9 @@
                             <div class="phone-container">
                                 <p>
                                     <label><b>Phone name</b></label>
-                                    <input type="text" class="input-text-phone-style"/>
+                                    <input type="text" th:field="*{phoneName}" class="input-text-phone-style" id="phoneName"/>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
                                 </p>
                             </div>
                         </tr>
@@ -24,9 +30,13 @@
                             <div class="phone-container">
                                 <p>
                                     <label><b>Brand</b></label>
-                                    <select class="input-text-phone-style" name="brand">
-
+                                    <select class="input-text-phone-style" name="brand" th:field="*{brand}" id="brand-phone">
+                                        <option th:each="brand:${brands}"
+                                                th:value="${brand.id}"
+                                                th:utext="${brand.brand}"/>
                                     </select>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
                                 </p>
                             </div>
                         </tr>
@@ -34,9 +44,13 @@
                             <div class="phone-container">
                                 <p>
                                     <label><b>Color</b></label>
-                                    <select class="input-text-phone-style" name="color">
-
+                                    <select class="input-text-phone-style" name="color" th:field="*{color}" id ="color-phone">
+                                        <option th:each="color:${colors}"
+                                                th:value="${color.id}"
+                                                th:utext="${color.color}"/>
                                     </select>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
                                 </p>
                             </div>
                         </tr>
@@ -44,7 +58,10 @@
                             <div class="phone-container">
                                 <p>
                                     <label><b>Price</b></label>
-                                    <input type="number" class="input-text-phone-style">
+                                    <input type="number" th:field="*{price}" id="price"
+                                           class="input-text-phone-style">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
                                 </p>
                             </div>
                         </tr>
@@ -52,7 +69,9 @@
                             <div class="phone-container">
                                 <p>
                                     <label><b>Quantity</b></label>
-                                    <input type="number" class="input-text-phone-style">
+                                    <input type="number" th:field="*{quantity}" class="input-text-phone-style" id="quantity">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
                                 </p>
                             </div>
                         </tr>
@@ -60,8 +79,10 @@
                             <div class="phone-container">
                                 <p>
                                     <label><b>Description</b></label>
-                                    <textarea rows="8" class="input-text-phone-style" name="Description">
+                                    <textarea rows="8" class="input-text-phone-style" th:field="*{description}" name="Description" id="description">
                                     </textarea>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
                                 </p>
                             </div>
                         </tr>
@@ -73,7 +94,9 @@
                             <td>
                                 <div class="container-img-style">
                                     <img class="img-style"
-                                         src="https://th.bing.com/th/id/OIP.LXJBJdljuhkK_SzCF8nVjgHaMh?w=182&h=308&c=7&r=0&o=5&dpr=1.25&pid=1.7"
+                                         id="image-brand"
+
+                                         th:src="'http://127.0.0.1:5000/get-image/'+${phone.image}"
                                          alt="Girl in a jacket"/>
                                 </div>
                             </td>
@@ -81,7 +104,11 @@
                         <tr>
                             <td class="tr-style">
                                 <div class="container-input-file">
-                                    <input class="upload-box" type="file"/>
+                                    <input class="upload-box" type="file" name="fileImage" id="fileImage" accept="image/png,image/jpeg"  th:value="${phone.image}"/>
+                                    <br>
+                                    <input hidden type="text" th:field="*{image}"/>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
                                 </div>
                             </td>
                         </tr>
@@ -89,7 +116,7 @@
                 </div>
                 <footer>
                     <div class="vertical-center">
-                        <button type="submit" class="btn-add">ADD</button>
+                        <button type="submit" class="btn-add">SUBMIT</button>
                     </div>
                 </footer>
             </div>
