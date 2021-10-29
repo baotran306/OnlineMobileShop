@@ -1,0 +1,31 @@
+.td-search-staff {
+    width: 140vh;
+}
+
+.text-search {
+    width: 60vh;
+}
+
+.td-btn-add-phone {
+    width: 30vh;
+}
+
+.table-phone {
+    width: 200vh;
+}
+
+.container-staff {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+#btn-add-staff {
+    width: 150px;
+    position: absolute;
+    right: 60px;
+    top: 25px
+}
+.tr-table-staff-title th{
+    text-align: center;
+    vertical-align: middle;
+}

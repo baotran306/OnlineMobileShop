@@ -1,0 +1,143 @@
+.container-upload-staff{
+    display: grid;
+    height: 90vh;
+    width: 100%;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.1fr 1fr 0.1fr;
+    grid-template-areas: "header header" "content1 content2" "footer footer";
+}
+header {
+    grid-area: header;
+    text-align: center;
+    vertical-align: middle;
+    background-color: aqua;
+    width: 100%;
+    height: 24px;
+}
+
+footer {
+    background-color: white;
+    grid-area: footer;
+}
+
+#content1 {
+    grid-area: content1;
+    background-color: white;
+    margin-left: 150px;
+}
+
+#content2 {
+    background-color: white;
+}
+
+.form-staff-design-left {
+    margin-left: 10px;
+    position: absolute;
+    min-height: 70vh;
+    min-width: 60vh;
+    right: 100px;
+    top: 50px;
+}
+
+.staff-container {
+    display: block;
+    position: relative;
+}
+
+.form-center-left {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+}
+
+.form-center-right {
+    position: absolute;
+    left: 30px;
+}
+
+.form-staff-design-right {
+    margin-left: 10px;
+    position: absolute;
+    min-height: 85vh;
+    min-width: 60vh;
+    left: 100px;
+    top: 50px;
+}
+
+.vertical-center {
+    position: absolute;
+    bottom: 20px;
+    left: 400px;
+}
+
+.container-staff {
+    box-shadow: 3px 3px 3px 3px darkgray;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    width: 160vh;
+    height: 100vh;
+    margin-bottom: 20px;
+}
+
+.staff-container i {
+    position: absolute;
+    visibility: hidden;
+    right: -15px;
+    top: 30px;
+}
+
+.staff-container small {
+    position: absolute;
+    visibility: hidden;
+    left: 0px;
+    top: 50px;
+}
+
+
+.staff-container.error i.fa-exclamation-circle {
+    visibility: visible;
+    color: red;
+}
+
+.staff-container.error small {
+    visibility: visible;
+    color: red;
+}
+
+.staff-container.success i.fa-exclamation-circle {
+    visibility: hidden;
+}
+
+.staff-container.success small {
+    visibility: hidden;
+}
+
+.table-add-staff {
+    width: 100%;
+}
+
+.table-add-staff tr {
+    display: flex;
+}
+
+.staff-container i.fa-eye {
+    visibility: visible;
+    position: absolute;
+    top: 32px;
+    right: 5px;
+}
+
+.staff-container i.fa-eye-slash {
+    visibility: visible;
+    position: absolute;
+    right: 5px;
+    top: 32px;
+}
+
+.vertical-center-staff{
+    position: absolute;
+    bottom: 50px;
+    left: 500px;
+}

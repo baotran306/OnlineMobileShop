@@ -12,6 +12,17 @@
     grid-area: content-show;
 }
 
+.brand-container {
+    box-shadow: 3px 3px 3px 3px darkgray;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    top: 70px;
+    left: 50px;
+    width: 400px;
+    height: 120px;
+    margin-bottom: 20px;
+}
+
 .content-update {
     background-color: white;
     grid-area: content-update;
@@ -43,8 +54,9 @@ table tr thead th {
 }
 
 .form-add-brand {
-    margin-top: 50px;
-    margin-left: 0px;
+    position: absolute;
+    top:0px;
+    left: 10px;
 }
 
 .style-add-brand {

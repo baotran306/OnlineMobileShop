@@ -6,7 +6,16 @@
     grid-template-rows: 0.1fr 1fr 0.1fr;
     grid-template-areas: "header header" "content1 content2" "footer footer";
 }
-
+.container-phone {
+    box-shadow: 3px 3px 3px 3px darkgray;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    width: 160vh;
+    height: 100vh;
+    margin-bottom: 20px;
+}
 header {
     grid-area: header;
     text-align: center;
@@ -152,7 +161,8 @@ footer {
 .vertical-center {
     margin: 0;
     position: absolute;
-    left: 50%;
+    bottom: 50px;
+    left: 500px;
 }
 .phone-container.error input {
     border-color: red;

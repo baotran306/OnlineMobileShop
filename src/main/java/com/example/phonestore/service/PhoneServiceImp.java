@@ -1,10 +1,7 @@
 package com.example.phonestore.service;
 
 import com.example.phonestore.DAO.PhoneDAO;
-import com.example.phonestore.object.Brand;
-import com.example.phonestore.object.Color;
-import com.example.phonestore.object.Phone;
-import com.example.phonestore.object.PhonePost;
+import com.example.phonestore.object.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +29,10 @@ public class PhoneServiceImp implements PhoneService {
     @Override
     public void savePhone(PhonePost phone) {
         phoneDAO.savePhone(phone);
+    }
+
+    @Override
+    public void updatePhone(PhonePut phone) {
+        phoneDAO.updatePhone(phone);
     }
 }

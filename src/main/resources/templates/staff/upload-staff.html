@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/main_layout}">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/form-upload-staff-style.css" type="text/css" rel="stylesheet">
+<!--    <link rel="stylesheet" href="/css/addphone-style.css" type="text/css">-->
+    <script type="text/javascript" src="/jscript/error-staff.js" th:src="@{/jscript/error-staff.js}"></script>
+</head>
+<body>
+    <div layout:fragment="content">
+        <div class="container-staff">
+            <form action="#" id="form-upload-staff" method="post">
+                <div class="container-upload-staff">
+                    <header> <b>UPLOAD STAFF</b></header>
+                    <div id="content1" class="form-content1">
+                        <div class="form-staff-design-right">
+                            <div class="form-center-right">
+                                <table class="table-add-staff">
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>First name</b></label>
+                                                <input type="text" class="input-text-phone-style" id="first-name-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Last name</b></label>
+                                                <input type="text" class="input-text-phone-style" id="last-name-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Identity Card</b></label>
+                                                <input type="text" pattern="^[0-9]*$" class="input-text-phone-style" id="identity-card-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Gender</b></label>
+                                                <select id="gender-staff" class="input-text-phone-style"></select>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Email</b></label>
+                                                <input type="text" class="input-text-phone-style" id="email-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Phone number</b></label>
+                                                <input type="text" class="input-text-phone-style" id="phone-num-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Date of birth</b></label>
+                                                <input type="date" class="input-text-phone-style" id="date-of-birth-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Address</b></label>
+                                                <input type="text" class="input-text-phone-style" id="address-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Salary</b></label>
+                                                <input type="text" class="input-text-phone-style" id="salary-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="content2" class="form-content2">
+                        <div class="form-staff-design-left">
+                            <div class="form-center-left">
+                                <table>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Username</b></label>
+                                                <input type="text" class="input-text-phone-style" id="username-staff" />
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Password</b></label>
+                                                <input type="password" class="input-text-phone-style" id="password-staff" />
+                                                <i class="fas fa-eye" id="showpassword"></i>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <br>
+                                        <div class="staff-container">
+                                            <p>
+                                                <label><b>Role</b></label>
+                                                <select id="role-staff" class="input-text-phone-style"></select>
+                                                <i class="fas fa-exclamation-circle"></i>
+                                                <small>Error message</small>
+                                            </p>
+                                        </div>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <footer>
+                        <div class="vertical-center-staff">
+                            <button type="submit" class="btn-add">ADD</button>
+                        </div>
+                    </footer>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

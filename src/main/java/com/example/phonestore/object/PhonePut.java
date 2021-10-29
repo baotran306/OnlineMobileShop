@@ -2,11 +2,11 @@ package com.example.phonestore.object;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-public class PhonePost {
-
+public class PhonePut {
+    @JsonProperty("id_phone")
+    int id;
     @JsonProperty("phone_name")
     @NotNull(message = "Phone name cannot be null")
     private String phoneName;
@@ -26,8 +26,9 @@ public class PhonePost {
     @JsonProperty("phone_description")
     private  String description;
 
-    public PhonePost(String phoneName, int color, int brand, String image, int quantity, Double price, String description) {
+    public PhonePut(int id,String phoneName, int color, int brand, String image, int quantity, Double price, String description) {
         this.phoneName = phoneName;
+        this.id = id;
         this.color = color;
         this.brand = brand;
         this.image = image;
@@ -36,7 +37,13 @@ public class PhonePost {
         this.description = description;
     }
 
-    public PhonePost() {
+    public PhonePut() {
+    }
+    public int getId(){
+        return this.id;
+    }
+    public void setId(int id){
+        this.id=id;
     }
     public String getPhoneName() {
         return phoneName;
@@ -96,8 +103,9 @@ public class PhonePost {
 
     @Override
     public String toString() {
-        return "PhonePost{" +
-                " phoneName='" + phoneName + '\'' +
+        return "PhonePut{" +
+                "id=" + id +
+                ", phoneName='" + phoneName + '\'' +
                 ", color=" + color +
                 ", brand=" + brand +
                 ", image='" + image + '\'' +

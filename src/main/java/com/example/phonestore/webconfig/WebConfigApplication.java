@@ -12,4 +12,5 @@ public class WebConfigApplication implements WebMvcConfigurer {
         CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
         return multipartResolver;
     }
+
 }

@@ -1,9 +1,6 @@
 package com.example.phonestore.service;
 
-import com.example.phonestore.object.Brand;
-import com.example.phonestore.object.Color;
-import com.example.phonestore.object.Phone;
-import com.example.phonestore.object.PhonePost;
+import com.example.phonestore.object.*;
 
 import java.util.List;
 
@@ -12,4 +9,5 @@ public interface PhoneService {
     public List<Color> getListColor();
     public List<Brand> getListBrand();
     public void savePhone(PhonePost phone);
+    public void updatePhone(PhonePut phone);
 }

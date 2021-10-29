@@ -1,10 +1,8 @@
 package com.example.phonestore.AdminController;
 
-import com.example.phonestore.object.Brand;
-import com.example.phonestore.object.Color;
-import com.example.phonestore.object.Phone;
-import com.example.phonestore.object.PhonePost;
+import com.example.phonestore.object.*;
 import com.example.phonestore.service.PhoneService;
+import com.example.phonestore.service.StaffService;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -27,8 +25,10 @@ import java.util.List;
 @RequestMapping("/admin")
 public class controller {
     private PhoneService phoneService;
+    private StaffService staffService;
 
-    public controller(PhoneService phoneService) {
+    public controller(PhoneService phoneService,StaffService staffService) {
+        this.staffService = staffService;
         this.phoneService = phoneService;
     }
 
@@ -45,7 +45,7 @@ public class controller {
         List<Phone> phones = phoneService.getListPhone();
         List<Color> colors = phoneService.getListColor();
         List<Brand> brands = phoneService.getListBrand();
-        PhonePost phone = new PhonePost();
+        PhonePut phone = new PhonePut();
         for (int i = 0; i < phones.size(); i++) {
             if (phones.get(i).getId() == theId) {
                 phone.setImage(phones.get(i).getImage());
@@ -75,32 +75,50 @@ public class controller {
         return "product/form-upload-phone";
     }
 
+
+    private void uploadFileImage(String fileName,MultipartFile multipartFile) throws IOException {
+        String uploadDir = "I:\\BACKUP\\backup\\mobile-shop-APIWebService\\Image";
+        Path uploadPath = Paths.get(uploadDir);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectories(uploadPath);
+        }
+        InputStream inputStream = multipartFile.getInputStream();
+        Path filePath = uploadPath.resolve(fileName);
+        Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
+    }
+
     @PostMapping(value = "/phone/save")
-    public String savePhone(@ModelAttribute("phone") PhonePost phone,
+    public String savePhone(@ModelAttribute("phone") PhonePut phone,
                             RedirectAttributes redirectAttributes,
                             @RequestParam("fileImage") MultipartFile multipartFile,
                             BindingResult result) {
+
         try {
-
-            System.out.println(phone.getImage());
-
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-            phone.setImage(fileName);
-            if (result.hasErrors()) {
-                return "product/form-upload-phone";
+            if (phone.getId() == 0) {
+                PhonePost phonePost = new PhonePost();
+                phonePost.setImage(fileName);
+                phonePost.setBrand(phone.getBrand());
+                phonePost.setColor(phone.getColor());
+                phonePost.setDescription(phone.getDescription());
+                phonePost.setPrice(phone.getPrice());
+                phonePost.setQuantity(phone.getQuantity());
+                phonePost.setPhoneName(phone.getPhoneName());
+                phone.setImage(fileName);
+                uploadFileImage(fileName,multipartFile);
+                phoneService.savePhone(phonePost);
+            } else {
+                if (!fileName.equals("")) {
+                    phone.setImage(fileName);
+                    uploadFileImage(fileName,multipartFile);
+                }
+
+                phoneService.updatePhone(phone);
             }
-            String uploadDir = "I:\\BACKUP\\backup\\mobile-shop-APIWebService\\Image";
-            Path uploadPath = Paths.get(uploadDir);
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-            InputStream inputStream = multipartFile.getInputStream();
-            Path filePath = uploadPath.resolve(fileName);
-            Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-//                phoneService.savePhone(phone);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
 
         return "redirect:/admin/phone";
     }
@@ -114,5 +132,15 @@ public class controller {
     public String showColor() {
         return "product/color";
     }
+    @GetMapping("/staff")
+    public String showStaff(ModelMap theModelMap){
+        List<GetStaff> staffs = staffService.getStaffList();
+        theModelMap.addAttribute("staffs",staffs);
+        return "staff/staff";
+    }
 
+    @GetMapping(value = "/staff/upload-staff")
+    public String showFormForUpLoad(){
+        return "staff/upload-staff";
+    }
 }

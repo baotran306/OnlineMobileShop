@@ -85,6 +85,9 @@
 td{
     word-break: break-all;
 }
-#btn-add-phone{
-    width: 15vh;
+#btn-add-phone {
+    width: 150px;
+    position: absolute;
+    right: 60px;
+    top: 25px
 }

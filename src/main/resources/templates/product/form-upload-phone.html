@@ -11,116 +11,119 @@
 </head>
 <body>
     <div layout:fragment="content">
-        <form id="form-upload-phone" class="form-add-phone" action="/admin/phone/save" th:object="${phone}" method="post" enctype="multipart/form-data">
-            <div class="container-add-phone">
-                <header><b>UPLOAD</b></header>
-                <div id="content1">
-                    <table class="table-add-phone">
-                        <tr>
-                            <div class="phone-container">
-                                <p>
-                                    <label><b>Phone name</b></label>
-                                    <input type="text" th:field="*{phoneName}" class="input-text-phone-style" id="phoneName"/>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <small>Error message</small>
-                                </p>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="phone-container">
-                                <p>
-                                    <label><b>Brand</b></label>
-                                    <select class="input-text-phone-style" name="brand" th:field="*{brand}" id="brand-phone">
-                                        <option th:each="brand:${brands}"
-                                                th:value="${brand.id}"
-                                                th:utext="${brand.brand}"/>
-                                    </select>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <small>Error message</small>
-                                </p>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="phone-container">
-                                <p>
-                                    <label><b>Color</b></label>
-                                    <select class="input-text-phone-style" name="color" th:field="*{color}" id ="color-phone">
-                                        <option th:each="color:${colors}"
-                                                th:value="${color.id}"
-                                                th:utext="${color.color}"/>
-                                    </select>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <small>Error message</small>
-                                </p>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="phone-container">
-                                <p>
-                                    <label><b>Price</b></label>
-                                    <input type="number" th:field="*{price}" id="price"
-                                           class="input-text-phone-style">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <small>Error message</small>
-                                </p>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="phone-container">
-                                <p>
-                                    <label><b>Quantity</b></label>
-                                    <input type="number" th:field="*{quantity}" class="input-text-phone-style" id="quantity">
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <small>Error message</small>
-                                </p>
-                            </div>
-                        </tr>
-                        <tr>
-                            <div class="phone-container">
-                                <p>
-                                    <label><b>Description</b></label>
-                                    <textarea rows="8" class="input-text-phone-style" th:field="*{description}" name="Description" id="description">
-                                    </textarea>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <small>Error message</small>
-                                </p>
-                            </div>
-                        </tr>
-                    </table>
-                </div>
-                <div id="content2">
-                    <table>
-                        <tr>
-                            <td>
-                                <div class="container-img-style">
-                                    <img class="img-style"
-                                         id="image-brand"
-
-                                         th:src="'http://127.0.0.1:5000/get-image/'+${phone.image}"
-                                         alt="Girl in a jacket"/>
+        <div class="container-phone">
+            <form id="form-upload-phone" class="form-add-phone" action="/admin/phone/save" th:object="${phone}" method="post" enctype="multipart/form-data">
+                <div class="container-add-phone">
+                    <header><b>UPLOAD</b></header>
+                    <div id="content1">
+                        <table class="table-add-phone">
+                            <tr>
+                                <div class="phone-container">
+                                    <p>
+                                        <label><b>Phone name</b></label>
+                                        <input type="hidden" th:field="*{id}" />
+                                        <input type="text" th:field="*{phoneName}" class="input-text-phone-style" id="phoneName"/>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
                                 </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="tr-style">
-                                <div class="container-input-file">
-                                    <input class="upload-box" type="file" name="fileImage" id="fileImage" accept="image/png,image/jpeg"  th:value="${phone.image}"/>
-                                    <br>
-                                    <input hidden type="text" th:field="*{image}"/>
-                                    <i class="fas fa-exclamation-circle"></i>
-                                    <small>Error message</small>
+                            </tr>
+                            <tr>
+                                <div class="phone-container">
+                                    <p>
+                                        <label><b>Brand</b></label>
+                                        <select class="input-text-phone-style" name="brand" th:field="*{brand}" id="brand-phone">
+                                            <option th:each="brand:${brands}"
+                                                    th:value="${brand.id}"
+                                                    th:utext="${brand.brand}"/>
+                                        </select>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <footer>
-                    <div class="vertical-center">
-                        <button type="submit" class="btn-add">SUBMIT</button>
+                            </tr>
+                            <tr>
+                                <div class="phone-container">
+                                    <p>
+                                        <label><b>Color</b></label>
+                                        <select class="input-text-phone-style" name="color" th:field="*{color}" id ="color-phone">
+                                            <option th:each="color:${colors}"
+                                                    th:value="${color.id}"
+                                                    th:utext="${color.color}"/>
+                                        </select>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="phone-container">
+                                    <p>
+                                        <label><b>Price</b></label>
+                                        <input type="number" th:field="*{price}" id="price"
+                                               class="input-text-phone-style">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="phone-container">
+                                    <p>
+                                        <label><b>Quantity</b></label>
+                                        <input type="number" th:field="*{quantity}" class="input-text-phone-style" id="quantity">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
+                                </div>
+                            </tr>
+                            <tr>
+                                <div class="phone-container">
+                                    <p>
+                                        <label><b>Description</b></label>
+                                        <textarea rows="8" class="input-text-phone-style" th:field="*{description}" name="Description" id="description">
+                                        </textarea>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
+                                </div>
+                            </tr>
+                        </table>
                     </div>
-                </footer>
-            </div>
-        </form>
+                    <div id="content2">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="container-img-style">
+                                        <img class="img-style"
+                                             id="image-brand"
+
+                                             th:src="'http://127.0.0.1:5000/get-image/'+${phone.image}"
+                                             alt="Girl in a jacket"/>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="tr-style">
+                                    <div class="container-input-file">
+                                        <input class="upload-box" type="file" name="fileImage" id="fileImage" accept="image/png,image/jpeg"  th:value="${phone.image}"/>
+                                        <br>
+                                        <input hidden type="text" th:field="*{image}"/>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <footer>
+                        <div class="vertical-center">
+                            <button type="submit" class="btn-add">SUBMIT</button>
+                        </div>
+                    </footer>
+                </div>
+            </form>
+        </div>
     </div>
 </body>
 </html>
