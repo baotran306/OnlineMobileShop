@@ -475,9 +475,11 @@ class SqlFunction:
             cursor.execute("select * from GetListHistoryCustomerOrder(?) order by id", customer_id)
             data = []
             for row in cursor:
-                data.append({'id_order': row[0], 'created_date': str(row[1]), 'status_id': row[2],
-                             'status_name': row[3], 'phone_id': row[4], 'phone_name': row[5], 'image': row[6],
-                             'quantity': row[7], 'price': float(row[8])})
+                data.append({'id_order': row[0], 'created_date': str(row[1]),
+                             'name': row[2], 'address': row[3], 'note': row[4],
+                             'status_id': row[5], 'status_name': row[6],
+                             'phone_id': row[7], 'phone_name': row[8], 'image': row[9],
+                             'quantity': row[10], 'price': float(row[11])})
             cursor.commit()
             data_output = format_list_history_order_customer(data)
             return data_output
@@ -492,9 +494,11 @@ class SqlFunction:
             cursor.execute("select * from dbo.GetListAllOrder(?, ?) order by id", from_date, to_date)
             data = []
             for row in cursor:
-                data.append({'id_order': row[0], 'created_date': str(row[1]), 'status_id': row[2],
-                             'status_name': row[3], 'phone_id': row[4], 'phone_name': row[5], 'image': row[6],
-                             'quantity': row[7], 'price': float(row[8])})
+                data.append({'id_order': row[0], 'created_date': str(row[1]),
+                             'name': row[2], 'address': row[3], 'note': row[4],
+                             'status_id': row[5], 'status_name': row[6],
+                             'phone_id': row[7], 'phone_name': row[8], 'image': row[9],
+                             'quantity': row[10], 'price': float(row[11])})
             cursor.commit()
             output_report = format_list_history_order_customer(data)
             return output_report
@@ -509,6 +513,9 @@ def format_list_history_order_customer(list_data):
     if len(list_data) == 1:
         return [{'id_order': list_data[-1]['id_order'],
                  'created_date': str(list_data[-1]['created_date']),
+                 'name': list_data[-1]['name'],
+                 'address': list_data[-1]['address'],
+                 'note': list_data[-1]['note'],
                  'status_id': list_data[-1]['status_id'],
                  'status_name': list_data[-1]['status_name'],
                  'list_order': [{'phone_id': list_data[-1]['phone_id'], 'phone_name': list_data[-1]['phone_name'],
@@ -528,6 +535,9 @@ def format_list_history_order_customer(list_data):
                                           'quantity': list_data[-1]['quantity'], 'price': float(list_data[-1]['price'])})
                 history_data.append({'id_order': list_data[i]['id_order'],
                                      'created_date': str(list_data[i]['created_date']),
+                                     'name': list_data[i]['name'],
+                                     'address': list_data[i]['address'],
+                                     'note': list_data[i]['note'],
                                      'status_id': list_data[i]['status_id'],
                                      'status_name': list_data[i]['status_name'],
                                      'list_order': list_order_detail})
@@ -537,6 +547,9 @@ def format_list_history_order_customer(list_data):
                                       'price': float(list_data[i]['price'])})
             history_data.append({'id_order': list_data[i]['id_order'],
                                  'created_date': str(list_data[i]['created_date']),
+                                 'name': list_data[i]['name'],
+                                 'address': list_data[i]['address'],
+                                 'note': list_data[i]['note'],
                                  'status_id': list_data[i]['status_id'],
                                  'status_name': list_data[i]['status_name'],
                                  'list_order': list_order_detail})
@@ -547,6 +560,9 @@ def format_list_history_order_customer(list_data):
                                       'price': float(list_data[-1]['price'])}]
                 history_data.append({'id_order': list_data[-1]['id_order'],
                                      'created_date': str(list_data[-1]['created_date']),
+                                     'name': list_data[-1]['name'],
+                                     'address': list_data[-1]['address'],
+                                     'note': list_data[-1]['note'],
                                      'status_id': list_data[-1]['status_id'],
                                      'status_name': list_data[-1]['status_name'],
                                      'list_order': list_order_detail})

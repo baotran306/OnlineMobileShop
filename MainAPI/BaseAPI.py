@@ -213,9 +213,17 @@ def change_password_staff():
         return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
 
 
-# @app.route("staff/reset-password", methods=['POST'])
-# def reset_password_staff():
-#     pass
+@app.route("/admin/reset-password", methods=['POST'])
+def reset_password_staff():
+    try:
+        username = request.json['username']
+        password = request.json['password']
+        if connect.reset_password_staff(username, extra_function.hash_password(password)):
+            return jsonify({'result': True, 'info': 'Cập nhật mật khẩu cho nhân viên thành công'})
+        return jsonify({'result': False, 'info': 'Cập nhật mật khẩu thất bại'})
+    except Exception as ex:
+        print(ex)
+        return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
 
 
 @app.route("/staff/show-info/<string:staff_id>", methods=['GET'])
