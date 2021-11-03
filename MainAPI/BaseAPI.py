@@ -169,10 +169,9 @@ def update_staff():
         return jsonify({'result': False, 'info': 'Có lỗi xảy ra'})
 
 
-@app.route("/admin/delete-staff", methods=['POST'])
-def delete_staff():
+@app.route("/admin/delete-staff/<string:staff_id>", methods=['DELETE'])
+def delete_staff(staff_id):
     try:
-        staff_id = request.json['staff_id']
         if connect.delete_staff(staff_id):
             data = {'result': True, 'info': 'Xóa nhân viên thành công'}
             return jsonify(data)
