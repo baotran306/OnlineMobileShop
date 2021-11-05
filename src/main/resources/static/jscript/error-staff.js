@@ -2,7 +2,7 @@ $(document).ready(function() {
     $('#form-upload-staff')[0].addEventListener('submit', (e) => {
         if (checkInput() === true) {
             console.log("true")
-            $('#form-upload-staff')[0].action = "https://www.formget.com/change-form-action-with-javascript/";
+            $('#form-upload-staff')[0].action = "/admin/staff/upload-staff/save";
         } else {
             e.preventDefault();
         }
@@ -34,6 +34,7 @@ $(document).ready(function() {
 });
 
 function checkInput() {
+    let isCheck = true;
     const firstNameValue = $('#first-name-staff')[0].value.trim();
     const lastNameValue = $('#last-name-staff')[0].value.trim();
     const identityCardValue = $('#identity-card-staff')[0].value.trim();
@@ -48,62 +49,73 @@ function checkInput() {
 
     if (firstNameValue === '') {
         setErrorFor($('#first-name-staff')[0], "First name cannot blank");
+        isCheck = false;
     } else {
         setSuccessFor($('#first-name-staff')[0]);
     }
     if (lastNameValue === '') {
         setErrorFor($('#last-name-staff')[0], "Last name cannot blank");
+        isCheck = false;
     } else {
         setSuccessFor($('#last-name-staff')[0]);
     }
 
     if (identityCardValue === '') {
         setErrorFor($('#identity-card-staff')[0], "Identity card cannot blank");
+        isCheck = false;
     } else {
         setSuccessFor($('#identity-card-staff')[0]);
     }
 
     if (emailValue === '') {
         setErrorFor($('#email-staff')[0], "Email cannot blank");
+        isCheck = false;
     } else {
         if (emailValue.match(/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) {
             setSuccesFor($('#email-staff')[0]);
         } else {
-            setSuccessFor($('#email-staff')[0], "Email example: abc1@gmail.com");
+            setErrorFor($('#email-staff')[0], "Email example: abc1@gmail.com");
+            isCheck = false;
         }
     }
 
     if (phoneNumberValue === '') {
         setErrorFor($('#phone-num-staff')[0], "Phone number cannot blank");
+        isCheck = false;
     } else {
         setSuccessFor($('#phone-num-staff')[0]);
     }
 
     if (dateOfBirthValue === '') {
         setErrorFor($('#date-of-birth-staff')[0], "Date of birth cannot blank");
+        isCheck = false;
     } else {
         setSuccessFor($('#date-of-birth-staff')[0]);
     }
 
     if (addressValue === '') {
         setErrorFor($('#address-staff')[0], "Address cannot blank");
+        isCheck = false;
     } else {
         setSuccessFor($('#address-staff')[0]);
     }
 
     if (salaryValue === '') {
         setErrorFor($('#salary-staff')[0], "Salary cannot blank");
+        isCheck = false;
     } else {
         setSuccesFor($('#salary-staff')[0]);
     }
 
     if (usernameValue === '') {
         setErrorFor($('#username-staff')[0], "Username cannot blank");
+        isCheck = false;
     } else {
         if (usernameValue.match("^[a-zA-Z0-9]+$")) {
             setSuccessFor($('#username-staff')[0]);
         } else {
             setErrorFor($('#username-staff')[0], "Username only character or number.");
+            isCheck = false;
         }
     }
 
@@ -114,9 +126,10 @@ function checkInput() {
             setSuccessFor($('#password-staff')[0]);
         } else {
             setErrorFor($('#password-staff')[0], "User more than 8 characters and combinations of letters, numbers, and symbols. ");
+            isCheck = false;
         }
     }
-
+    return isCheck;
 }
 
 function setErrorFor(input, message) {

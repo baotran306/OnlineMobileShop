@@ -42,52 +42,25 @@
 .tr-table-phone-title{
     text-align: center;
 }
-.td-phone-name{
+.tr-table-phone-title th{
+    text-align: center;
+    vertical-align: middle;
+}
+
+#table-phone tr td{
     text-align: center;
     align-content: center;
     vertical-align: middle;
 }
-.td-phone-image{
-    text-align: center;
-    align-content: center;
-    vertical-align: middle;
-}
-.td-phone-brand{
-    text-align: center;
-    align-content: center;
-    vertical-align: middle;
-}
-.td-phone-color{
-    text-align: center;
-    align-content: center;
-    vertical-align: middle;
-}
-.td-phone-quantity{
-    text-align: center;
-    align-content: center;
-    vertical-align: middle;
-}
-.td-phone-price{
-    text-align: center;
-    align-content: center;
-    vertical-align: middle;
-}
-.td-phone-description{
-    text-align: center;
-    align-content: center;
-    vertical-align: middle;
-}
-.td-phone-action{
-    text-align: center;
-    align-content: center;
-    vertical-align: middle;
-}
-td{
-    word-break: break-all;
-}
+
 #btn-add-phone {
     width: 150px;
     position: absolute;
-    right: 60px;
-    top: 25px
+    right: 125px;
+    top: 15px
+}
+i.fa-search{
+    position: absolute;
+    top: 25px;
+    left: 690px;
 }

@@ -11,7 +11,7 @@
 <body>
     <div layout:fragment="content">
         <div class="container-staff">
-            <form action="#" id="form-upload-staff" method="post">
+            <form id="form-upload-staff" action="/admin/staff/upload-staff/save" th:object="${staff}" method="post">
                 <div class="container-upload-staff">
                     <header> <b>UPLOAD STAFF</b></header>
                     <div id="content1" class="form-content1">
@@ -22,7 +22,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>First name</b></label>
-                                                <input type="text" class="input-text-phone-style" id="first-name-staff" />
+                                                <input type="text" th:field="*{firstName}" class="input-text-phone-style" id="first-name-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -32,7 +32,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Last name</b></label>
-                                                <input type="text" class="input-text-phone-style" id="last-name-staff" />
+                                                <input type="text" th:field="*{lastName}" class="input-text-phone-style" id="last-name-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -42,7 +42,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Identity Card</b></label>
-                                                <input type="text" pattern="^[0-9]*$" class="input-text-phone-style" id="identity-card-staff" />
+                                                <input type="text" th:field="*{identityCard}" pattern="^[0-9]*$" class="input-text-phone-style" id="identity-card-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -52,7 +52,12 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Gender</b></label>
-                                                <select id="gender-staff" class="input-text-phone-style"></select>
+                                                <select id="gender-staff" class="input-text-phone-style" th:field="*{gender}">
+                                                    <option th:value="Nam"
+                                                            th:text="Nam"/>
+                                                    <option th:value="Nữ"
+                                                            th:text="Nữ"/>
+                                                </select>
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -62,7 +67,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Email</b></label>
-                                                <input type="text" class="input-text-phone-style" id="email-staff" />
+                                                <input type="text" th:field="*{email}" class="input-text-phone-style" id="email-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -72,7 +77,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Phone number</b></label>
-                                                <input type="text" class="input-text-phone-style" id="phone-num-staff" />
+                                                <input type="text" th:field="*{phoneNumber}" class="input-text-phone-style" id="phone-num-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -82,7 +87,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Date of birth</b></label>
-                                                <input type="date" class="input-text-phone-style" id="date-of-birth-staff" />
+                                                <input type="date" th:field="*{dateOfBirth}" class="input-text-phone-style" id="date-of-birth-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -92,7 +97,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Address</b></label>
-                                                <input type="text" class="input-text-phone-style" id="address-staff" />
+                                                <input type="text" th:field="*{address}" class="input-text-phone-style" id="address-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -102,7 +107,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Salary</b></label>
-                                                <input type="text" class="input-text-phone-style" id="salary-staff" />
+                                                <input type="text" th:field="*{salary}" class="input-text-phone-style" id="salary-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -120,7 +125,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Username</b></label>
-                                                <input type="text" class="input-text-phone-style" id="username-staff" />
+                                                <input type="text" th:field="*{username}" class="input-text-phone-style" id="username-staff" />
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>
@@ -130,7 +135,7 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Password</b></label>
-                                                <input type="password" class="input-text-phone-style" id="password-staff" />
+                                                <input type="password" th:field="*{password}" class="input-text-phone-style" id="password-staff" />
                                                 <i class="fas fa-eye" id="showpassword"></i>
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
@@ -142,7 +147,12 @@
                                         <div class="staff-container">
                                             <p>
                                                 <label><b>Role</b></label>
-                                                <select id="role-staff" class="input-text-phone-style"></select>
+                                                <select id="role-staff" class="input-text-phone-style" th:field="*{roleId}">
+                                                    <option th:value="1"
+                                                            th:text="'Quản lý'"/>
+                                                    <option th:value="2"
+                                                            th:text="'Nhân viên bán hàng'"/>
+                                                </select>
                                                 <i class="fas fa-exclamation-circle"></i>
                                                 <small>Error message</small>
                                             </p>

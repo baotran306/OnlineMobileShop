@@ -3,6 +3,10 @@ package com.example.phonestore.object;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class GetStaff {
     @JsonProperty("id")
     private String id;
@@ -34,6 +38,20 @@ public class GetStaff {
     private String userName;
 
     public GetStaff() {
+    }
+
+    private String formatDate(String Data) {
+        try {
+            SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat format2 = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = format1.parse(Data);
+            String dateFormat = format2.format(date).toString();
+            return dateFormat;
+        }catch (Exception e){
+            e.printStackTrace();
+            return "01/01/1900";
+        }
+
     }
 
     public GetStaff(String id, String firstName, String lastName, String identityCard, String address, String dateOfBirth, String gender, String email, int isDeleted, String phoneNumber, int roleId, String role, double salary, String userName) {
@@ -105,8 +123,9 @@ public class GetStaff {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
+    public void setDateOfBirth(String dateOfBirth)
+    {
+        this.dateOfBirth = formatDate(dateOfBirth);
     }
 
     public String getGender() {

@@ -1,34 +1,122 @@
 <!DOCTYPE html>
 <html
-      lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="~{layout/main_layout}">
+        lang="en" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="~{layout/main_layout}">
 <head>
     <meta charset="UTF-8">
     <link href="/css/staff-style.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-    <div layout:fragment="content">
-        <div class="container-staff">
-            <table>
-                <br>
-                <tr>
-                    <td>
-                        <table>
-                            <tr>
-                                <td class="td-search-staff"><input type="text" class="text-search"></td>
-                                <td><a class="btn btn-primary btn-sm mb-3" id="btn-add-staff" href="/admin/staff/upload-staff">Add</a></td>
+<div layout:fragment="content">
+    <div class="container-staff">
+        <table>
+            <br>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="td-search-staff">
+                                <input type="text" class="text-search" id="text-search-staff" placeholder="search">
+                                <i class="fas fa-search"></i>
+                            </td>
+                            <td><a class="btn btn-primary btn-sm mb-3" id="btn-add-staff"
+                                   href="/admin/staff/upload-staff">Add</a></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-staff">
+                    <div>
+                        <table class="table table-bordered table-striped" id="table-staff">
+                            <!-- build HTML table based on employees -->
+                            <thead class="table-dark">
+                            <tr class="tr-table-staff-title">
+                                <th class="th-Last-name-staff">Last name</th>
+                                <th class="th-first-name-staff">First name</th>
+                                <th class="th-id-card-staff">Identity card</th>
+                                <th class="th-phone-number-staff">Phone number</th>
+                                <th class="th-date-of-birth-staff">Date of birth</th>
+                                <th class="th-gender-staff">Gender</th>
+                                <th class="th-email-staff">Address</th>
+                                <th class="th-email-staff">Email</th>
+                                <th class="th-role-staff">Role</th>
+                                <th class="th-salary-staff">Salary</th>
+                                <th class="th-username-staff">Username</th>
+                                <th class="th-action-staff">Action</th>
                             </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="tr-staff-style" th:each="staffTemp:${pageStaff.content}">
+                                <td th:text="${staffTemp.lastName}"/>
+                                <td th:text="${staffTemp.firstName}"/>
+                                <td th:text="${staffTemp.identityCard}"/>
+                                <td th:text="${staffTemp.phoneNumber}"/>
+                                <td th:text="${staffTemp.dateOfBirth}"/>
+                                <td th:text="${staffTemp.gender}"/>
+                                <td th:text="${staffTemp.address}"/>
+                                <td th:text="${staffTemp.email}"/>
+                                <td th:switch="${staffTemp.roleId}">
+                                    <span th:case="1">Quản lý</span>
+                                    <span th:case="*">Nhân viên bán hàng</span>
+                                </td>
+
+                                <td th:text="${staffTemp.salary}"/>
+                                <td th:text="${staffTemp.userName}"/>
+                                <td><a class="btn btn-primary btn-sm mb-3" id="btn-update-staff"
+                                       th:href="@{/admin/staff/update(idStaff=${staffTemp.id})}">Update</a>
+                                    <a href="#" id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
+                                       th:href="@{/admin/staff/delete(idStaff=${staffTemp.id})}">Delete</a></td>
+                            </tr>
+                            </tbody>
                         </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="table-phone">
-                        <div>
-                            <table class="table table-bordered table-striped" id="table-product">
-                                <!-- build HTML table based on employees -->
-                                <thead class="table-dark">
-                                <tr class="tr-table-staff-title">
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm" th:if="${pageStaff.totalPages > 0}"
+                th:each="pageNumber : ${pageNumbers}">
+                <li class="page-item">
+                    <a class="page-link"
+
+                       th:href="@{/admin/staff(page=${pageNumber})}"
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber==pageStaff.number + 1} ? active"/>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<script th:inline="javascript" layout:fragment="script">
+    /*<![CDATA[*/
+    var staffs = /*[[${staffs}]]*/ 'default';
+    var staffPage =  /*[[${pageStaff.content}]]*/ 'default';
+    /*]]>*/
+    $('#text-search-staff').on('keyup', function () {
+        var value = $(this).val();
+        var data = FilterFunction(value, staffs);
+        rebuildTable(data,value);
+    });
+
+    function FilterFunction(value, data) {
+        var filterData = [];
+        for (var i = 0; i < data.length; i++) {
+            value = value.toLowerCase();
+            var lname = data[i].last_name.toLowerCase();
+            var fname = data[i].first_name.toLowerCase();
+            if (lname.includes(value)||fname.includes(value)) {
+                filterData.push(data[i]);
+            }
+        }
+        return filterData;
+    }
+
+    function rebuildTable(data, value) {
+        var table = document.getElementById('table-staff');
+        table.innerHTML = `<thead class="table-dark">
+                            <tr class="tr-table-staff-title">
                                     <th class="th-Last-name-staff">Last name</th>
                                     <th class="th-first-name-staff">First name</th>
                                     <th class="th-id-card-staff">Identity card</th>
@@ -41,31 +129,68 @@
                                     <th class="th-salary-staff">Salary</th>
                                     <th class="th-username-staff">Username</th>
                                     <th class="th-action-staff">Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr class="tr-phone-style" th:each="staffTemp:${staffs}">
-                                    <td th:text="${staffTemp.lastName}" />
-                                    <td th:text="${staffTemp.firstName}"/>
-                                    <td th:text="${staffTemp.identityCard}"/>
-                                    <td th:text="${staffTemp.phoneNumber}"/>
-                                    <td th:text="${staffTemp.dateOfBirth}"/>
-                                    <td th:text="${staffTemp.gender}"/>
-                                    <td th:text="${staffTemp.address}"/>
-                                    <td th:text="${staffTemp.email}"/>
-                                    <td th:text="${staffTemp.role}"/>
-                                    <td th:text="${staffTemp.salary}"/>
-                                    <td th:text="${staffTemp.userName}"/>
-                                    <td><a class="btn btn-primary btn-sm mb-3" href="#">Update</a>
-                                        <a href="#" class="btn btn-danger btn-sm mb-3">Delete</a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
+                            </tr>
+                            </thead>`;
+        if(value ===''){
+            for (var i = 0; i < staffPage.length; i++) {
+                var row = `
+                <tbody>
+                    <tr>
+                         <td>${staffPage[i].last_name}</td>
+                         <td>${staffPage[i].first_name}</td>
+                         <td>${staffPage[i].identity_card}</td>
+                         <td>${staffPage[i].phone_num}</td>
+                         <td>${staffPage[i].day_of_birth}</td>
+                         <td>${staffPage[i].gender}</td>
+                         <td>${staffPage[i].address}</td>
+                         <td>${staffPage[i].email}</td>
+                         <td>${staffPage[i].role_name}</td>
+                         <td>${staffPage[i].salary}</td>
+                         <td>${staffPage[i].username}</td>
+                         <td><a class="btn btn-primary btn-sm mb-3" id="btn-update-staff"
+                                  href="/admin/staff/update?idStaff=${staffPage[i].id}">Update</a>
+                               <a id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
+                                  href="/admin/staff/delete?idStaff=${staffPage[i].id}">Delete</a></td>
+                    </tr>
+                 </tbody>`
+                table.innerHTML += row;
+            }
+        }else {
+            for (var i = 0; i < data.length; i++) {
+                var row = `
+                <tbody>
+                    <tr>
+                         <td>${data[i].last_name}</td>
+                         <td>${data[i].first_name}</td>
+                         <td>${data[i].identity_card}</td>
+                         <td>${data[i].phone_num}</td>
+                         <td>${data[i].day_of_birth}</td>
+                         <td>${data[i].gender}</td>
+                         <td>${data[i].address}</td>
+                         <td>${data[i].email}</td>
+                         <td>${data[i].role_name}</td>
+                         <td>${data[i].salary}</td>
+                         <td>${data[i].username}</td>
+                         <td><a class="btn btn-primary btn-sm mb-3" id="btn-update-staff"
+                                  href="/admin/staff/update?idStaff=${data[i].id}">Update</a>
+                               <a id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
+                                  href="/admin/staff/delete?idStaff=${data[i].id}">Delete</a></td>
+                    </tr>
+                 </tbody>`
+                table.innerHTML += row;
+            }
+        }
+        format();
+    }
+
+    function format() {
+        let x = document.querySelectorAll(".sp-price");
+        for (let i = 0, len = x.length; i < len; i++) {
+            let num = Number(x[i].innerHTML)
+                .toLocaleString('en');
+            x[i].innerHTML = num;
+        }
+    }
+</script>
 </body>
 </html>

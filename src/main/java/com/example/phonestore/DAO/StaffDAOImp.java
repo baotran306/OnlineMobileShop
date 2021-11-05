@@ -1,7 +1,6 @@
 package com.example.phonestore.DAO;
 
-import com.example.phonestore.object.GetStaff;
-import com.example.phonestore.object.Phone;
+import com.example.phonestore.object.*;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -29,5 +28,47 @@ public class StaffDAOImp implements StaffDAO {
         List<GetStaff> staffs = response.block();
 
         return staffs;
+    }
+
+    @Override
+    public GetStaff getStaffById(String theId) {
+        Mono<GetStaff> response = client.get()
+                .uri("staff/show-info/"+theId)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<GetStaff>() {
+                });
+        GetStaff staffs = response.block();
+        return staffs;
+    }
+
+    @Override
+    public void deleteStaffById(String theId) {
+        Mono<ResponseMessage> response = client.delete()
+                .uri("admin/delete-staff/"+theId)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage message = response.block();
+        System.out.println(message.toString());
+    }
+
+    @Override
+    public void updateStaff(StaffUpdate staffUpdate) {
+        Mono<ResponseMessage> response = client.post()
+                .uri("admin/update-staff")
+                .body(Mono.just(staffUpdate),StaffUpdate.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage message = response.block();
+        System.out.println(message.toString());
+    }
+
+    @Override
+    public void postStaff(StaffUpload staffUpload) {
+        Mono<ResponseMessage> response = client.post()
+                .uri("admin/insert-staff")
+                .body(Mono.just(staffUpload), StaffUpload.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage message = response.block();
+        System.out.println(message.toString());
     }
 }

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="~{layout/main_layout}">
 <head>
     <meta charset="UTF-8">
@@ -32,8 +34,8 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr class="tr-phone-style">
-                                    <td class="td-brand-name">Red</td>
+                                <tr class="tr-phone-style" th:each="temp:${colorPage.content}">
+                                    <td class="td-brand-name" th:text="${temp.color}">Red</td>
                                     <td class="td-action-brand">
                                         <a class="btn btn-primary btn-sm mb-3">Update</a>
                                         <a href="#" class="btn btn-danger btn-sm mb-3">Delete</a>
@@ -41,6 +43,18 @@
                                 </tr>
                                 </tbody>
                             </table>
+                            <nav aria-label="...">
+                                <ul class="pagination pagination-sm" th:if="${colorPage.totalPages > 0}"
+                                    th:each="pageNumber : ${pageNumbers}">
+                                    <li class="page-item">
+                                        <a class="page-link"
+                                           style="color: black"
+                                           th:href="@{/admin/color(page=${pageNumber})}"
+                                           th:text="${pageNumber}"
+                                           th:class="${pageNumber==colorPage.number + 1} ? active"/>
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </td>
                 </tr>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html
+        lang="en" xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorator="~{layout/main_layout}">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/staff-style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-staff">
+        <table>
+            <br>
+            <tr>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="td-search-phone" >
+                                <input type="text" class="text-search" id="text-search-customer" placeholder="search">
+                                <i class="fas fa-search"></i>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="table-staff">
+                    <div>
+                        <table class="table table-bordered table-striped" id="table-staff">
+                            <!-- build HTML table based on employees -->
+                            <thead class="table-dark">
+                            <tr class="tr-table-staff-title">
+                                <th class="th-Last-name-staff">Last name</th>
+                                <th class="th-first-name-staff">First name</th>
+                                <th class="th-id-card-staff">Identity card</th>
+                                <th class="th-phone-number-staff">Phone number</th>
+                                <th class="th-date-of-birth-staff">Date of birth</th>
+                                <th class="th-gender-staff">Gender</th>
+                                <th class="th-email-staff">Address</th>
+                                <th class="th-email-staff">Email</th>
+                                <th class="th-actione-customer">History buy</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="tr-phone-style" th:each="tempCustomer:${customerPage.content}">
+                                <td th:text="${tempCustomer.lastName}"/>
+                                <td th:text="${tempCustomer.firstName}"/>
+                                <td th:text="${tempCustomer.identityCard}"/>
+                                <td th:text="${tempCustomer.phoneNumber}"/>
+                                <td th:text="${tempCustomer.dateOfBirth}"/>
+                                <td th:text="${tempCustomer.gender}"/>
+                                <td th:text="${tempCustomer.address}"/>
+                                <td th:text="${tempCustomer.email}"/>
+                                <td><a class="btn btn-primary btn-sm mb-3" href="#">View</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <nav aria-label="...">
+            <ul class="pagination pagination-sm" th:if="${customerPage.totalPages > 0}"
+                th:each="pageNumber : ${pageNumbers}">
+                <li class="page-item">
+                    <a class="page-link"
+
+                       th:href="@{/admin/customer(page=${pageNumber})}"
+                       th:text="${pageNumber}"
+                       th:class="${pageNumber==customerPage.number + 1} ? active"/>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<script th:inline="javascript" layout:fragment="script">
+    /*<![CDATA[*/
+    var customers = /*[[${customers}]]*/ 'default';
+    var customerPage =  /*[[${customerPage.content}]]*/ 'default';
+    /*]]>*/
+    $('#text-search-customer').on('keyup', function () {
+        var value = $(this).val();
+        var data = FilterFunction(value, customers);
+        rebuildTable(data,value);
+    });
+
+    function FilterFunction(value, data) {
+        var filterData = [];
+        for (var i = 0; i < data.length; i++) {
+            value = value.toLowerCase();
+            var lname = data[i].last_name.toLowerCase();
+            var fname = data[i].first_name.toLowerCase();
+            if (lname.includes(value)||fname.includes(value)) {
+                filterData.push(data[i]);
+            }
+        }
+        return filterData;
+    }
+
+    function rebuildTable(data, value) {
+        var table = document.getElementById('table-staff');
+        table.innerHTML = ` <thead class="table-dark">
+                            <tr class="tr-table-staff-title">
+                                <th class="th-Last-name-staff">Last name</th>
+                                <th class="th-first-name-staff">First name</th>
+                                <th class="th-id-card-staff">Identity card</th>
+                                <th class="th-phone-number-staff">Phone number</th>
+                                <th class="th-date-of-birth-staff">Date of birth</th>
+                                <th class="th-gender-staff">Gender</th>
+                                <th class="th-email-staff">Address</th>
+                                <th class="th-email-staff">Email</th>
+                                <th class="th-actione-customer">History buy</th>
+                            </tr>
+                            </thead>`;
+        if(value ===''){
+            for (var i = 0; i < customerPage.length; i++) {
+                var row = `
+                <tbody>
+                    <tr>
+                         <td>${customerPage[i].last_name}</td>
+                         <td>${customerPage[i].first_name}</td>
+                         <td>${customerPage[i].identity_card}</td>
+                         <td>${customerPage[i].phone_num}</td>
+                         <td>${customerPage[i].day_of_birth}</td>
+                         <td>${customerPage[i].gender}</td>
+                         <td>${customerPage[i].address}</td>
+                         <td>${customerPage[i].email}</td>
+                         <td><a class="btn btn-primary btn-sm mb-3" href="#">View</a></td>
+                    </tr>
+                 </tbody>`
+                table.innerHTML += row;
+            }
+        }else {
+            for (var i = 0; i < data.length; i++) {
+                var row = `
+                <tbody>
+                    <tr>
+                         <td>${data[i].last_name}</td>
+                         <td>${data[i].first_name}</td>
+                         <td>${data[i].identity_card}</td>
+                         <td>${data[i].phone_num}</td>
+                         <td>${data[i].day_of_birth}</td>
+                         <td>${data[i].gender}</td>
+                         <td>${data[i].address}</td>
+                         <td>${data[i].email}</td>
+                         <td><a class="btn btn-primary btn-sm mb-3" href="#">View</a></td>
+                    </tr>
+                 </tbody>`
+                table.innerHTML += row;
+            }
+        }
+        format();
+    }
+
+    function format() {
+        let x = document.querySelectorAll(".sp-price");
+        for (let i = 0, len = x.length; i < len; i++) {
+            let num = Number(x[i].innerHTML)
+                .toLocaleString('en');
+            x[i].innerHTML = num;
+        }
+    }
+</script>
+
+</body>
+</html>

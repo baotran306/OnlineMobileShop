@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+	<base href="${pageContext.servletContext.contextPath}/">
+</head>
+<body>
+	<div class="d-flex ">
+    <div class='w-50  d-flex' style='height:100vh;justify-content: center;'>
+      <img src="https://previews.123rf.com/images/iarti/iarti1702/iarti170200070/72087853-mobile-shop-template-with-phone-on-white-background-can-used-for-mobile-store-phone-service-and-repa.jpg" alt="Ảnh background"
+				style='width: 500px;height:500px;align-self: center;align-content: center;'
+			>
+    </div>
+    <div class='w-50  d-flex' style='height:100vh;justify-self: center;'>
+      <form th:action="@{/admin/login-fail}" id='formLoginCustomer' th:object="${account}"  method='post' style='margin:auto;border:1px solid #ccc;width:400px;padding: 50px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);'>
+        <h3>Đăng nhập</h3>
+        <div class="form-group" style=''>
+            <label for="account" class="form-label">Tài khoản</label>
+            <input th:field="*{username}" id="account" name="account"  rules='required' inputNoSpace type="text" placeholder="Nhập tài khoản nhân viên" class="form-control">
+            <span class="form-message"></span>
+          </div>
+          <div class="form-group" style=''>
+            <label for="password" class="form-label">Mật khẩu</label>
+            <input th:field="*{password}"  id="password" name="password" rules='required' inputNoSpace type="password" placeholder="Nhập mật khẩu nhân viên" class="form-control">
+            <span class="form-message"></span>
+          </div>
+          <button type='submit' class='btn btn-success w-100 mt-4' >
+            Đăng nhập
+          </button>
+          <p th:text="${message.getMessage()}" style="color: red"/>
+          <!-- <div class='text-center mt-2'>
+            <a href='#'  >Quên mật khẩu?</a>
+          </div>
+          <hr>
+          <div class='btn btn-primary mt-2' style='margin-left: 50%;transform: translateX(-50%);width:120px;'>
+            Đăng kí
+          </div> -->
+      </form>
+    </div>
+	</div>
+	<style>
+		.form-group.invalid .form-control {
+		  border-color: #f33a58;
+		}
+		.form-group .form-control:focus {
+		  border-color: #80bdff;
+		}
+		.form-group.invalid .form-message {
+		  color: #f33a58;
+		}
+		
+		.form-message {
+		  font-size: 10px;
+		  padding: 4px 0 0;
+		}
+	</style>
+<!--	<script>-->
+<!--	function isEmptyObj(object) {-->
+<!--		return Object.keys(object).length === 0?true:false;-->
+<!--	}-->
+<!--	function isObjhas(object, key) {-->
+<!--		if(isEmptyObj(object)) return false;-->
+<!--		return object ? hasOwnProperty.call(object, key) : false;-->
+<!--	}-->
+<!--	let validatorRules={-->
+<!--		required:function(value){-->
+<!--				return value?undefined:"Vui lòng nhập trường này";-->
+<!--		},-->
+<!--		email:function(value){-->
+<!--				let regex=/^[a-zA-Z]+[1-9a-zA-Z]*@([a-zA-Z]+\.)+[a-zA-Z]+$/g-->
+<!--				return regex.test(value)?undefined:'Email không đúng';-->
+<!--		},-->
+<!--		phone:function(value){-->
+<!--				let regex=/^(09|03|07|08|05)[0-9]{8}$/g-->
+<!--				return regex.test(value)?undefined:'Số điện thoại không đúng ';-->
+<!--		},-->
+<!--		digitAll:function(value){-->
+<!--			let regex=/^\d*$/g-->
+<!--			return regex.test(value)?undefined:'Nhập sai định dạng';-->
+<!--		},-->
+<!--		digits:function(limit){-->
+<!--				return function(value){-->
+<!--						let regexs={-->
+<!--								'3':/^\d{3}$/,-->
+<!--								'9':/^\d{9}$/,-->
+<!--								'10':/^\d{10}$/,-->
+<!--						}-->
+<!--						return regexs[limit].test(value)?undefined:'Nhập sai định dạng';-->
+<!--				}-->
+<!--		},-->
+<!--		length:function(max){-->
+<!--				return function(value){-->
+<!--						return value.length==max?undefined:`Vui lòng nhập chính xác ${max} kí tự`;-->
+<!--				}-->
+<!--		},-->
+<!--		equal:function(selector){-->
+<!--				return function(value){-->
+<!--						let originEleValue=document.querySelector(selector).value-->
+<!--						return value==originEleValue?undefined:'Mật khẩu xác thực không chính xác'-->
+<!--				}-->
+<!--		},-->
+<!--		minLength:function(min){-->
+<!--				return function(value){-->
+<!--						return value.length>=min?undefined:`Vui lòng nhập ít nhất ${min} kí tự`;   -->
+<!--				}-->
+<!--		},-->
+<!--		min:function(min){-->
+<!--				return function(value){-->
+<!--						return value>=min?undefined:`Vui lòng nhập lớn hơn hoặc bằng ${min}`;   -->
+<!--				}-->
+<!--		},-->
+<!--		maxLength:function(max){-->
+<!--				return function(value){-->
+<!--						return value.length<=max?undefined:`Vui lòng nhập nhiều nhất ${max} kí tự`;-->
+<!--				}-->
+<!--		},-->
+<!--		max:function(max){-->
+<!--				return function(value){-->
+<!--						return value<=max?undefined:`Vui lòng nhập bé hơn hoặc bằng ${max}`;-->
+<!--				}-->
+<!--		},-->
+<!--		childMaxLength:function(max){-->
+<!--				return function(value){-->
+<!--						let kq=undefined;-->
+<!--						let childs=value.split(' ')-->
+<!--						for(let item of childs){-->
+<!--								if(item.length<=max){-->
+
+<!--								}else{-->
+<!--										kq='Không hợp lệ'-->
+<!--										break;-->
+<!--								}-->
+<!--						}-->
+<!--						return kq;-->
+<!--				}-->
+<!--		},    -->
+<!--	};-->
+<!--	function validator(formSelector,options={}){-->
+<!--	    console.log('validator')-->
+<!--	console.log('validator validator')-->
+<!--	    if(isObjhas(options,'run')){-->
+<!--	        options.run()-->
+<!--	    }-->
+<!--	    let formRules={   -->
+<!--	    };-->
+<!--	    let formElement = document.querySelector(formSelector)-->
+<!--	    console.log(formElement)-->
+<!--	    function getParent(element,selector){-->
+<!--	        while(element.parentElement){-->
+<!--	            if(element.parentElement.matches(selector)){-->
+<!--	                return element.parentElement-->
+<!--	            }-->
+<!--	            element=element.parentElement-->
+<!--	        }-->
+
+<!--	    }-->
+<!--	    // input không nhận kí tự space-->
+<!--	    let inputNoSpace=formElement.querySelectorAll('[inputNoSpace]')-->
+<!--	    for(let input of inputNoSpace){-->
+<!--	        input.onkeydown=function(e){-->
+<!--	            if(e.key==' '){-->
+<!--	                e.preventDefault();-->
+<!--	            }-->
+<!--	        }-->
+<!--	    }-->
+<!--	    // input không nhận kí tự 2space-->
+<!--	    let inputNo2Space=formElement.querySelectorAll('[inputNo2Space]')-->
+<!--	    for(let input of inputNo2Space){-->
+<!--	        input.onkeydown=function(e){-->
+<!--	            if(e.key==' '){-->
+<!--	                let value=e.target.value-->
+<!--	                if(value.length==0&&value[0]==' ') {-->
+<!--	                    e.preventDefault();-->
+<!--	                    return-->
+<!--	                }-->
+<!--	                if(value.length>0&&value[value.length-1]==' '){-->
+<!--	                    e.preventDefault();-->
+<!--	                    return-->
+<!--	                }   -->
+<!--	            }-->
+<!--	        }-->
+<!--	    }-->
+
+
+<!--	    let inputs=formElement.querySelectorAll('[name][rules]')-->
+<!--	    for(let  input of inputs){-->
+<!--	        let rules=input.getAttribute('rules').split('|')-->
+<!--	        for(let rule of rules){-->
+<!--	            let ruleInfo-->
+<!--	            let isRuleHasValue=rule.includes(':');-->
+<!--	            if(isRuleHasValue){-->
+<!--	                ruleInfo=rule.split(':');-->
+<!--	                rule=ruleInfo[0]-->
+<!--	            }-->
+<!--	            let ruleFunc=validatorRules[rule]-->
+<!--	            if(isRuleHasValue){-->
+<!--	                ruleFunc=ruleFunc(ruleInfo[1])-->
+<!--	            }-->
+<!--	            if(Array.isArray(formRules[input.name])){-->
+<!--	                formRules[input.name].push(ruleFunc)-->
+<!--	            }else{-->
+<!--	                formRules[input.name]=[ruleFunc];-->
+<!--	            }-->
+<!--	        }-->
+<!--	        //Lang nghe su kien-->
+<!--	        input.onblur=handleValidate-->
+<!--	        input.oninput=handleClearError-->
+<!--	    }-->
+
+
+<!--	    let btnSubmit=formElement.querySelector('[type="submit"]')-->
+<!--	    formElement.onsubmit=function(e){-->
+<!--	        e.preventDefault();-->
+<!--	        let inputs=formElement.querySelectorAll('[name][rules]')-->
+<!--	        let isValid=true-->
+<!--	        for(let  input of inputs){-->
+<!--	            let kt=handleValidate({-->
+<!--	                target:input-->
+<!--	            }) -->
+<!--	            if(kt==false)  isValid=false  -->
+<!--	            -->
+<!--	        }-->
+<!--	        console.log(isValid)-->
+<!--	        // Khi khong co loi thi submit form-->
+<!--	        if(isValid){-->
+<!--	            console.log('submit form')-->
+<!--	                    formElement.submit();-->
+<!--	                -->
+<!--	            }-->
+
+<!--	        }-->
+<!--	    }-->
+<!--		// ham thuc hien Validate-->
+<!--		function handleValidate(e){-->
+<!--			let rules=formRules[e.target.name];-->
+<!--			let errorMessage-->
+<!--			// Trim-->
+<!--			e.target.value=e.target.value.trim()-->
+<!--			// Xóa dau cach du thua-->
+<!--			e.target.value=e.target.value.replace(/ {2,}/g,' ')-->
+<!--			for(let rule of rules){-->
+<!--					errorMessage= rule(e.target.value)-->
+<!--					if(errorMessage) break;-->
+<!--					console.log(errorMessage)-->
+<!--			}-->
+<!--			// Neu co loi thi hien thi message ra UI-->
+<!--			if(errorMessage){-->
+<!--					let formGroup= getParent(e.target,'.form-group')-->
+<!--					if(formGroup){-->
+<!--							formGroup.classList.add('invalid')-->
+<!--							let formMessage=formGroup.querySelector('.form-message')-->
+<!--							if(formMessage){-->
+<!--									formMessage.innerText=errorMessage-->
+<!--									console.log(errorMessage)-->
+<!--							}-->
+<!--					}   -->
+<!--			}else{-->
+<!--		-->
+<!--			}-->
+<!--			return !errorMessage;-->
+<!--		}-->
+<!--		// Clear message loi-->
+<!--		function handleClearError(e){-->
+<!--			let formGroup= getParent(e.target,'.form-group')-->
+<!--			if(formGroup.classList.contains('invalid')){-->
+<!--					formGroup.classList.remove('invalid')-->
+<!--					let formMessage=formGroup.querySelector('.form-message')-->
+<!--					if(formMessage){-->
+<!--							formMessage.innerText=""-->
+<!--					}-->
+<!--			}-->
+<!--		}-->
+<!--	</script>-->
+<!--	-->
+<!--	-->
+<!--	<script type="text/javascript"  charset="utf-8">-->
+<!--		validator('#formLoginCustomer',{})-->
+<!--	</script>-->
+<!--	&lt;!&ndash; jQuery library &ndash;&gt;-->
+<!--	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--	-->
+<!--	&lt;!&ndash; Popper JS &ndash;&gt;-->
+<!--	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>-->
+<!--	-->
+<!--	&lt;!&ndash; Latest compiled JavaScript &ndash;&gt;-->
+<!--	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+
+</body>
+</html>

@@ -22,10 +22,37 @@
 #btn-add-staff {
     width: 150px;
     position: absolute;
-    right: 60px;
-    top: 25px
+    right: 125px;
+    top: 15px
 }
 .tr-table-staff-title th{
     text-align: center;
     vertical-align: middle;
+}
+.tr-phone-style td{
+    vertical-align: middle;
+    align-content: center;
+
+    text-align: center;
+}
+
+#btn-update-staff{
+    width: 70px;
+
+}
+#btn-delete-staff{
+    width: 70px;
+}
+#table-staff {
+    margin-top: 10px;
+}
+#table-staff tr td {
+    vertical-align: middle;
+    align-content: center;
+    text-align: center;
+}
+i.fa-search{
+    position: absolute;
+    top: 25px;
+    left: 700px;
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/main_layout}">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/update-staff-style.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/jscript/error-staff-update.js" th:src="@{/jscript/error-staff-update.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-staff">
+        <form id="form-update-staff" th:object="${staff}" method="post">
+            <div class="container-update-staff">
+                <header> <b>UPDATE STAFF</b></header>
+                <div id="content1" class="form-content1">
+                    <div class="form-center-center">
+                        <table class="table-add-staff">
+
+                            <tr>
+                                <div class="staff-container">
+                                    <p>
+                                        <input type="text" hidden th:field="*{id}" class="input-text-phone-style" />
+                                        <label><b>Name</b></label>
+                                        <span th:text="${staff.lastName}+' '+${staff.firstName}" class="input-text-phone-style" />
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
+                                </div>
+                            </tr>
+
+                            <tr>
+                                <div class="staff-container">
+                                    <p>
+                                        <label><b>Salary</b></label>
+                                        <input type="text" th:field="*{salary}" class="input-text-phone-style" id="salary-staff-update" />
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </p>
+                                </div>
+                            </tr>
+                            <div class="staff-container">
+                                <p>
+                                    <label><b>Role</b></label>
+                                    <select id="Role-staff-update" class="input-text-phone-style" th:field="*{roleId}">
+                                        <option
+                                                th:value="1"
+                                                th:text="'Quản lý'"/>
+                                        <option
+                                                th:value="2"
+                                                th:text="'Nhân viên bán hàng'"/>
+                                    </select>
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    <small>Error message</small>
+                                </p>
+                            </div>
+                        </table>
+                    </div>
+                </div>
+                <footer>
+                    <div class="vertical-center-staff">
+                        <button type="submit" class="btn-add">ADD</button>
+                    </div>
+                </footer>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+.table-list-order {
+    border: 1px solid black;
+    width: 100%;
+}
+
+.table-list-order tr {
+    border: 1px solid black;
+}
+
+.table-list-order tr td {
+    border: 1px solid black;
+}
+
+.table-list-order tr th {
+    border: 1px solid black;
+    width: auto;
+}
+
+.th-phone-name-order {
+    width: 150px;
+}
+
+.th-image-order {
+    width: 200px;
+}
+
+.th-price-order {
+    width: 100px;
+}
+
+.th-quantity-order {
+    width: 30px;
+}
+
+.container-order {
+    position: relative;
+    left: 50px;
+    margin-right: 100px;
+}
+
+.tr-table-order-title th {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tr-order-style td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.btn-submit-search {
+    border-radius: 5px 5px 5px 5px;
+    background-color: rgba(81, 230, 23, 0.925);
+}
+
+.order-container-date i {
+    visibility: hidden;
+    position: absolute;
+    left: 210px;
+    top: 7px;
+}
+
+.order-container-date small {
+    visibility: hidden;
+    position: absolute;
+    left: 80px;
+    top: 25px;
+}
+
+.order-container-date.error i.fa-exclamation-circle {
+    visibility: visible;
+    color: red;
+}
+
+.order-container-date.error small {
+    visibility: visible;
+    color: red;
+}
+
+.order-container-date.success i.fa-exclamation-circle {
+    visibility: hidden;
+    color: red;
+}
+
+.order-container-date.success small {
+    visibility: hidden;
+    color: red;
+}
+
+.order-container-date.error input {
+    border-color: red;
+}
+
+.order-container-date {
+    position: relative;
+}
+
+#icon-error-to-date {
+    position: absolute;
+    left: 154px;
+}
+
+.order-container-date small.message-error-to-date {
+    position: absolute;
+    left: 22px;
+}

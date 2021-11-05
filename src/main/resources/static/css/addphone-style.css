@@ -11,7 +11,7 @@
     border-radius: 5px 5px 5px 5px;
     position: relative;
     top: 10px;
-    left: 50px;
+    left: 0px;
     width: 160vh;
     height: 100vh;
     margin-bottom: 20px;
@@ -29,9 +29,7 @@ footer {
     background-color: white;
     grid-area: footer;
 }
-.error{
-    color: red;
-}
+
 
 #content1 {
     grid-area: content1;

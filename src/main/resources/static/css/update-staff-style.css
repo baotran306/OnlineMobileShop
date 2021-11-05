@@ -1,11 +1,12 @@
-.container-upload-staff{
+.container-update-staff {
     display: grid;
-    height: 90vh;
+    height: 80vh;
     width: 100%;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-template-rows: 0.1fr 1fr 0.1fr;
-    grid-template-areas: "header header" "content1 content2" "footer footer";
+    grid-template-areas: "header" "content1" "footer";
 }
+
 header {
     grid-area: header;
     text-align: center;
@@ -23,11 +24,7 @@ footer {
 #content1 {
     grid-area: content1;
     background-color: white;
-    margin-left: 0px;
-}
-
-#content2 {
-    background-color: white;
+    margin-left: 150px;
 }
 
 .form-staff-design-left {
@@ -77,7 +74,7 @@ footer {
     top: 10px;
     left: 0px;
     width: 160vh;
-    height: 100vh;
+    height: 80vh;
     margin-bottom: 20px;
 }
 
@@ -94,7 +91,6 @@ footer {
     left: 0px;
     top: 50px;
 }
-
 
 .staff-container.error i.fa-exclamation-circle {
     visibility: visible;
@@ -122,14 +118,6 @@ footer {
     display: flex;
 }
 
-.staff-container.error input {
-    border-color: red;
-}
-
-.staff-container.error select {
-    border-color: red;
-}
-
 .staff-container i.fa-eye {
     visibility: visible;
     position: absolute;
@@ -144,8 +132,22 @@ footer {
     top: 32px;
 }
 
-.vertical-center-staff{
+.vertical-center-staff {
     position: absolute;
     bottom: 50px;
-    left: 500px;
+    left: 550px;
+}
+
+.form-staff-design-center {
+    position: absolute;
+    min-height: 85vh;
+    min-width: 60vh;
+    left: 0px;
+    top: 50px;
+}
+
+.form-center-center {
+    position: absolute;
+    top: 100px;
+    right: 400px;
 }

@@ -58,7 +58,6 @@ nav li a {
 
 .nav-staff {
     margin-top: 5vh;
-    margin-bottom: 5vh;
 }
 
 .nav-product {
@@ -68,6 +67,7 @@ nav li a {
 
 .nav-customer {
     margin-bottom: 5vh;
+    margin-top: 5vh;
 }
 
 ul div div a {
