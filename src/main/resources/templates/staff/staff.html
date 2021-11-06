@@ -29,7 +29,7 @@
             <tr>
                 <td class="table-staff">
                     <div>
-                        <table class="table table-bordered table-striped" id="table-staff">
+                        <table class="table table-hover table-bordered border-primary" id="table-staff">
                             <!-- build HTML table based on employees -->
                             <thead class="table-dark">
                             <tr class="tr-table-staff-title">
@@ -67,7 +67,12 @@
                                 <td><a class="btn btn-primary btn-sm mb-3" id="btn-update-staff"
                                        th:href="@{/admin/staff/update(idStaff=${staffTemp.id})}">Update</a>
                                     <a href="#" id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
-                                       th:href="@{/admin/staff/delete(idStaff=${staffTemp.id})}">Delete</a></td>
+                                       th:href="@{/admin/staff/delete(idStaff=${staffTemp.id})}"
+                                       onclick="if(!(confirm('Are you sure want to delete this staff?'))) return false">Delete</a>
+                                    <a id="btn-reset-pass" class="btn btn-danger btn-sm mb-3"
+                                       th:href="@{/admin/staff/reset(username=${staffTemp.userName})}"
+                                       onclick="if(!(confirm('Are you sure want to reset password this staff?'))) return false">Reset pass</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -150,7 +155,12 @@
                          <td><a class="btn btn-primary btn-sm mb-3" id="btn-update-staff"
                                   href="/admin/staff/update?idStaff=${staffPage[i].id}">Update</a>
                                <a id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
-                                  href="/admin/staff/delete?idStaff=${staffPage[i].id}">Delete</a></td>
+                                  href="/admin/staff/delete?idStaff=${staffPage[i].id}"
+                                  onclick="if(!(confirm('Are you sure want to delete this employee?'))) return false">Delete</a>
+                                   <a id="btn-reset-pass" class="btn btn-danger btn-sm mb-3"
+                                       th:href="/admin/staff/reset?username=${data[i].username}"
+                                       onclick="if(!(confirm('Are you sure want to reset password this staff?'))) return false">Reset pass</a>
+                                  </td>
                     </tr>
                  </tbody>`
                 table.innerHTML += row;
@@ -174,7 +184,12 @@
                          <td><a class="btn btn-primary btn-sm mb-3" id="btn-update-staff"
                                   href="/admin/staff/update?idStaff=${data[i].id}">Update</a>
                                <a id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
-                                  href="/admin/staff/delete?idStaff=${data[i].id}">Delete</a></td>
+                                  href="/admin/staff/delete?idStaff=${data[i].id}"
+                                  onclick="if(!(confirm('Are you sure want to delete this employee?'))) return false">Delete</a>
+                                  <a id="btn-reset-pass" class="btn btn-danger btn-sm mb-3"
+                                       th:href="/admin/staff/reset?username=${data[i].username}"
+                                       onclick="if(!(confirm('Are you sure want to reset password this staff?'))) return false">Reset pass</a>
+                         </td>
                     </tr>
                  </tbody>`
                 table.innerHTML += row;

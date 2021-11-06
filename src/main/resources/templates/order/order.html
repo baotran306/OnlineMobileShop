@@ -7,98 +7,208 @@
     <link href="/css/order-style.css" type="text/css" rel="stylesheet">
     <script type="text/javascript" src="/jscript/order.js" th:src="@{/jscript/order.js}"></script>
 </head>
-    <body>
-        <div layout:fragment="content">
-            <div class="container-order">
-                <table>
-                    <br>
-                    <tr>
-                        <td>
-                            <form id="form-search-by-date" method="get">
-                                <table>
-                                    <tr>
-                                        <td>
+<body>
+<div layout:fragment="content">
+    <div class="container-order">
+        <table>
+            <br>
+            <tr>
+                <td>
+                    <form id="form-search-by-date" method="get">
+                        <table>
+                            <tr>
+                                <td>
+                                    <div class="order-container-date">
+                                        <span>From date: </span>
+                                        <input type="date" id="from-date" class="from-date" th:name="from-date"
+                                               th:value="${date.fromDate}">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <small>Error message</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="order-container-date">
+                                        <span class="to">To: </span>
+                                        <input type="date" id="to-date" th:name="to-date" th:value="${date.toDate}">
+                                        <i class="fas fa-exclamation-circle" id="icon-error-to-date"></i>
+                                        <small class="message-error-to-date">Error message</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn-submit-search"><i class="fas fa-search"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <form id="select-status" method="get">
+                    <td class="td-search-phone" id="text-search-customer">
+                        <br>
+                        <select class="filter-status" id="filter-status" th:onchange="filterFunction()">
+                            <option>--</option>
+                            <option value="1">Đơn mới</option>
+                            <option value="2">Đang giao</option>
+                            <option value="3">Đã giao</option>
+                            <option value="4">Hủy đơn</option>
+                        </select>
+                    </td>
+                </form>
+            </tr>
+            <tr>
+                <td class="table-order">
+                    <div>
+                        <table class="table table-hover table-bordered border-primary" id="table-order">
+                            <!-- build HTML table based on employees -->
+                            <thead class="table-dark">
+                            <tr class="tr-table-order-title">
+                                <th class="th-name-order">Name</th>
+                                <th class="th-phone-number-order">Phone number</th>
+                                <th class="th-address-order">Address</th>
+                                <th class="th-order">Order</th>
+                                <th class="th-date-order">Order date</th>
+                                <th class="th-status">status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr class="tr-order-style" th:class="hidden+${tempCustomerOrder.idStatus}" th:each="tempCustomerOrder:${customerOrders}">
+                                <td th:text="${tempCustomerOrder.name}"/>
+                                <td th:text="${tempCustomerOrder.note}"/>
+                                <td th:text="${tempCustomerOrder.address}"/>
+                                <td>
+                                    <table class="table table-hover table-bordered border-primary">
+                                        <thead class="table-dark">
+                                        <tr>
+                                            <th class="th-phone-name-order">Phone name</th>
+                                            <th class="th-price-order">Price</th>
+                                            <th class="th-quantity-order">Quantity</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="tempOrder:${tempCustomerOrder.listOrder}">
+                                            <td class="th-phone-name-order" th:text="${tempOrder.phoneName}"/>
+                                            <td class="th-price-order">
+                                                <span th:text="${#numbers.formatDecimal(tempOrder.price, 0, 'COMMA', 0, 'POINT')}"></span>
+                                                VNĐ
+                                            </td>
+                                            <td class="th-quantity-order" th:text="${tempOrder.quantity}"/>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td th:text="${tempCustomerOrder.createDate}"/>
+                                <td>
+                                    <select th:id="${tempCustomerOrder.idOrder}"
+                                            th:onchange="myFunction([[${tempCustomerOrder.idOrder}]],[[${session.user.getStaffInfo().id}]])">
+                                        <option th:value="1"
+                                                th:selected="${tempCustomerOrder.idStatus==1}"
+                                                th:text="'Đơn mới'"/>
+                                        <option th:value="2"
+                                                th:selected="${tempCustomerOrder.idStatus==2}"
+                                                th:text="'Đang giao'"/>
+                                        <option th:value="3"
+                                                th:selected="${tempCustomerOrder.idStatus==3}"
+                                                th:text="'Ðã giao'"/>
+                                        <option th:value="4"
+                                                th:selected="${tempCustomerOrder.idStatus==4}"
+                                                th:text="'Hủy đơn'"/>
+                                    </select>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script th:inline="javascript" layout:fragment="script">
+    function myFunction(idOrder, idStaff) {
+        const idStatus = $('#' + `${idOrder}` + ' option:selected').val();
 
-                                            <div class="order-container-date">
-                                                <span>From date: </span>
-                                                <input type="date" id="from-date" class="from-date" th:name="from-date" th:value="${date.fromDate}">
-                                                <i class="fas fa-exclamation-circle"></i>
-                                                <small>Error message</small>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="order-container-date">
-                                                <span class="to">To: </span>
-                                                <input type="date" id="to-date" th:name="to-date" th:value="${date.toDate}">
-                                                <i class="fas fa-exclamation-circle" id="icon-error-to-date"></i>
-                                                <small class="message-error-to-date">Error message</small>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <button type="submit" class="btn-submit-search"><i class="fas fa-search"></i></button>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </form>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="td-search-phone" id="text-search-customer">
-                            <br>
-                            <input type="text" class="text-search">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="table-order">
-                            <div>
-                                <table class="table table-bordered table-striped" id="table-order">
-                                    <!-- build HTML table based on employees -->
-                                    <thead class="table-dark">
-                                    <tr class="tr-table-order-title">
-                                        <th class="th-name-order">Name</th>
-                                        <th class="th-phone-number-order">Phone number</th>
-                                        <th class="th-address-order">Address</th>
-                                        <th class="th-order">Order</th>
-                                        <th class="th-date-order">Order date</th>
-                                        <th class="th-status">status</th>
-                                        <th class="th-action-order">action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="tr-order-style" th:each="tempCustomerOrder:${customerOrders}">
-                                        <td th:text="${tempCustomerOrder.name}"/>
-                                        <td th:text="${tempCustomerOrder.note}"/>
-                                        <td th:text="${tempCustomerOrder.address}"/>
-                                        <td>
-                                            <table class="table-list-order">
-                                                <thead>
-                                                    <tr >
-                                                        <th class="th-phone-name-order">Phone name</th>
-                                                        <th class="th-price-order">Price</th>
-                                                        <th class="th-quantity-order" >Quantity</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <tr th:each="tempOrder:${tempCustomerOrder.listOrder}">
-                                                        <td class="th-phone-name-order" th:text="${tempOrder.phoneName}"/>
-                                                        <td class="th-price-order" th:text="${tempOrder.price}"/>
-                                                        <td class="th-quantity-order" th:text="${tempOrder.quantity}"/>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </td>
-                                        <td th:text="${tempCustomerOrder.createDate}"/>
-                                        <td th:text="${tempCustomerOrder.status}"/>
-                                        <td><a class="btn btn-primary btn-sm mb-3" href="#">Update</a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+        $.ajax({
+            type: 'POST',
+            url: 'http://127.0.0.1:5000/staff/update-order',
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                'staff_id': idStaff,
+                'order_id': idOrder,
+                'status_id': idStatus
+            }),
+            success: function (data) {
+                alert("Save Complete");
+            }
+        });
+    }
+function filterFunction() {
+        const idValue = $('#filter-status')[0].value;
+        var value1 = document.getElementsByClassName('hidden1');
+        var value2 = document.getElementsByClassName('hidden2');
+        var value3 = document.getElementsByClassName('hidden3');
+        var value4 = document.getElementsByClassName('hidden4');
 
-            </div>
-        </div>
-    </body>
+
+    if(parseInt(idValue)===2) {
+            for (var i = 0; i < value2.length; i++) {
+                value2[i].style.display = '';
+            }
+            for (var i = 0; i < value1.length; i++) {
+                value1[i].style.display = 'none';
+            }
+            for (var i = 0; i < value3.length; i++) {
+                value3[i].style.display = 'none';
+            }
+            for (var i = 0; i < value4.length; i++) {
+                value4[i].style.display = 'none';
+            }
+    }
+    if(parseInt(idValue)===1) {
+        for (var i = 0; i < value1.length; i++) {
+            value1[i].style.display = '';
+        }
+        for (var i = 0; i < value2.length; i++) {
+            value2[i].style.display = 'none';
+        }
+        for (var i = 0; i < value3.length; i++) {
+            value3[i].style.display = 'none';
+        }
+        for (var i = 0; i < value4.length; i++) {
+            value4[i].style.display = 'none';
+        }
+    }
+    if(parseInt(idValue)===3) {
+        for (var i = 0; i < value3.length; i++) {
+            value3[i].style.display = '';
+        }
+        for (var i = 0; i < value2.length; i++) {
+            value2[i].style.display = 'none';
+        }
+        for (var i = 0; i < value1.length; i++) {
+            value1[i].style.display = 'none';
+        }
+        for (var i = 0; i < value4.length; i++) {
+            value4[i].style.display = 'none';
+        }
+    }
+    if(parseInt(idValue)===4) {
+        for (var i = 0; i < value4.length; i++) {
+            value4[i].style.display = '';
+        }
+        for (var i = 0; i < value2.length; i++) {
+            value2[i].style.display = 'none';
+        }
+        for (var i = 0; i < value3.length; i++) {
+            value3[i].style.display = 'none';
+        }
+        for (var i = 0; i < value1.length; i++) {
+            value1[i].style.display = 'none';
+        }
+    }
+}
+</script>
+</body>
 </html>

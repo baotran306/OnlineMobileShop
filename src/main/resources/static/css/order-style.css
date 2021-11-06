@@ -104,3 +104,9 @@
     position: absolute;
     left: 22px;
 }
+.filter-status{
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    width: 150px;
+}

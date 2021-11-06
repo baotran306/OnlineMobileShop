@@ -1,6 +1,7 @@
 package com.example.phonestore.DAO;
 
 import com.example.phonestore.object.*;
+import com.example.phonestore.object.user.User;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -66,6 +67,17 @@ public class StaffDAOImp implements StaffDAO {
         Mono<ResponseMessage> response = client.post()
                 .uri("admin/insert-staff")
                 .body(Mono.just(staffUpload), StaffUpload.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage message = response.block();
+        System.out.println(message.toString());
+    }
+
+    @Override
+    public void resetPassword(User user) {
+        Mono<ResponseMessage> response = client.post()
+                .uri("admin/reset-password")
+                .body(Mono.just(user), User.class)
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();

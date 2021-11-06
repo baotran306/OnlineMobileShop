@@ -25,21 +25,16 @@
                             <tr>
                                 <td class="table-brand">
                                     <div>
-                                        <table class="table table-bordered table-striped" id="table-product">
+                                        <table class="table table-hover table-bordered border-primary" id="table-product">
                                             <!-- build HTML table based on employees -->
                                             <thead class="table-dark">
                                             <tr class="tr-table-phone-title">
                                                 <th class="th-brand-name">Brand</th>
-                                                <th class="th-action-brand">Action</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             <tr class="tr-phone-style" th:each="temp:${brandPage.content}">
                                                 <td class="td-brand-name" th:text="${temp.brand}">Apple</td>
-                                                <td class="td-action-brand">
-                                                    <a class="btn btn-primary btn-sm mb-3">Update</a>
-                                                    <a href="#" class="btn btn-danger btn-sm mb-3">Delete</a>
-                                                </td>
                                             </tr>
                                             </tbody>
                                         </table>
@@ -62,14 +57,14 @@
                     </div>
                     <div class="content-update">
                         <div class="brand-container">
-                            <form action="/brand" class="form-add-brand">
+                            <form action="/admin/brand/save" class="form-add-brand" th:object="${postBrand}" method="post">
                                 <table class="style-add-brand">
                                     <tr>
                                         <td>
                                             <div class="phone-container">
                                                 <p>
                                                     <label><b>Brand</b></label>
-                                                    <input class="input-text-phone-style" type="text">
+                                                    <input th:field="*{brand}" class="input-text-phone-style" type="text">
                                                 </p>
                                             </div>
                                         </td>

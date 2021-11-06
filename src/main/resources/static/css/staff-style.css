@@ -37,11 +37,14 @@
 }
 
 #btn-update-staff{
-    width: 70px;
+    width: 80px;
 
 }
 #btn-delete-staff{
-    width: 70px;
+    width: 80px;
+}
+#btn-reset-pass{
+    width: 80px;
 }
 #table-staff {
     margin-top: 10px;
@@ -54,5 +57,5 @@
 i.fa-search{
     position: absolute;
     top: 25px;
-    left: 700px;
+    left: 690px;
 }

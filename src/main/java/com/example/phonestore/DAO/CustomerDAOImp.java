@@ -2,6 +2,8 @@ package com.example.phonestore.DAO;
 
 import com.example.phonestore.object.GetCustomer;
 import com.example.phonestore.object.GetStaff;
+import com.example.phonestore.object.ResponseMessageGetHistoryOrder;
+import com.example.phonestore.object.StaffUpload;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -28,5 +30,15 @@ public class CustomerDAOImp implements CustomerDAO {
                 });
         List<GetCustomer> customers = response.block();
         return customers;
+    }
+
+    @Override
+    public ResponseMessageGetHistoryOrder getListHistory(String theId) {
+        Mono<ResponseMessageGetHistoryOrder> response = client.get()
+                .uri("customer/check-history-order/"+theId)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessageGetHistoryOrder>() {
+                });
+        ResponseMessageGetHistoryOrder responseMessage = response.block();
+        return responseMessage;
     }
 }

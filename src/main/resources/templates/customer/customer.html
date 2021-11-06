@@ -27,7 +27,7 @@
             <tr>
                 <td class="table-staff">
                     <div>
-                        <table class="table table-bordered table-striped" id="table-staff">
+                        <table class="table table-hover table-bordered border-primary" id="table-staff">
                             <!-- build HTML table based on employees -->
                             <thead class="table-dark">
                             <tr class="tr-table-staff-title">
@@ -52,7 +52,7 @@
                                 <td th:text="${tempCustomer.gender}"/>
                                 <td th:text="${tempCustomer.address}"/>
                                 <td th:text="${tempCustomer.email}"/>
-                                <td><a class="btn btn-primary btn-sm mb-3" href="#">View</a></td>
+                                <td><a class="btn btn-primary btn-sm mb-3" th:href="@{/admin/customer/history(idCustomer=${tempCustomer.idCustomer})}">View</a></td>
                             </tr>
                             </tbody>
                         </table>

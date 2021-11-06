@@ -19,7 +19,7 @@
                 <nav class="menu">
                     <ul>
                         <li>
-                            <span>USERNAME: </span>
+                            <span>User: </span>
                             <a href="#" th:text="${session.user.getStaffInfo().username}"/>
                         </li>
                         <li id="nav-1-home" class="nav-home">
@@ -52,7 +52,7 @@
                         </div>
                         <li id="nav-3-staff" th:if="${session.user.getStaffInfo().roleId==1}" class="nav-staff">
                             <a href="/admin/staff">
-                                <span class="fas fa-staffInfo-tag"></span>
+                                <span class="fas fa-users-cog"></span>
                                 <span>Staff</span>
                             </a>
                         </li>

@@ -1,6 +1,7 @@
 package com.example.phonestore.AdminController;
 
 import com.example.phonestore.object.*;
+import com.example.phonestore.object.PostColor;
 import com.example.phonestore.object.user.ResponseLoginMessage;
 import com.example.phonestore.object.user.User;
 import com.example.phonestore.service.*;
@@ -152,9 +153,9 @@ public class controller {
 
     @RequestMapping("/brand")
     public String showBrand(ModelMap theModelMap,@RequestParam("page") Optional<Integer> page) {
-        Optional<Integer> size = Optional.of(5);
+        Optional<Integer> size = Optional.of(10);
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(10);
         Page<Brand> brandPage = phoneService.findPaginatedBrands(PageRequest.of(currentPage-1,pageSize));
         theModelMap.addAttribute("brandPage",brandPage);
         int totalPages = brandPage.getTotalPages();
@@ -165,14 +166,22 @@ public class controller {
             theModelMap.addAttribute("pageNumbers", pageNumbers);
         }
         theModelMap.addAttribute("brands",phoneService.getListBrand());
+        theModelMap.addAttribute("postBrand",new PostBrand());
+
         return "product/brand";
+    }
+
+    @PostMapping("/brand/save")
+    public String saveBrand(@ModelAttribute("postBrand")PostBrand postBrand){
+        phoneService.postBrand(postBrand);
+        return "redirect:/admin/brand";
     }
 
     @RequestMapping("/color")
     public String showColor(ModelMap theModelMap,@RequestParam("page") Optional<Integer> page) {
-        Optional<Integer> size = Optional.of(5);
+        Optional<Integer> size = Optional.of(10);
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(10);
         Page<Color> colorPage = phoneService.findPaginatedColors(PageRequest.of(currentPage-1,pageSize));
         theModelMap.addAttribute("colorPage",colorPage);
         int totalPages = colorPage.getTotalPages();
@@ -182,8 +191,15 @@ public class controller {
                     .collect(Collectors.toList());
             theModelMap.addAttribute("pageNumbers", pageNumbers);
         }
+        theModelMap.addAttribute("postColor",new PostColor());
         theModelMap.addAttribute("colors",phoneService.getListColor());
         return "product/color";
+    }
+
+    @PostMapping("/color/save")
+    public String saveColor(@ModelAttribute("postColor")PostColor postColor){
+        phoneService.postColor(postColor);
+        return "redirect:/admin/color";
     }
 
     @GetMapping("/staff")
@@ -243,6 +259,11 @@ public class controller {
         staffService.deleteStaffById(theId);
         return "redirect:/admin/staff";
     }
+    @GetMapping(value = "staff/reset")
+    public String resetPassStaff(@RequestParam("username") String username){
+        staffService.resetPassword(new User(username,"123456"));
+        return "redirect:/admin/staff";
+    }
 
     @GetMapping(value = "/customer")
     public String showCustomer(ModelMap modelMap,@RequestParam("page") Optional<Integer> page){
@@ -264,6 +285,11 @@ public class controller {
         return "customer/customer";
     }
 
+    @GetMapping(value = "/customer/history")
+    public String showHistory(ModelMap theModelMap,@RequestParam("idCustomer") String theId){
+        theModelMap.addAttribute("order",customerService.getListHistory(theId).getCustomerOrder());
+        return "customer/history-view";
+    }
     @GetMapping(value="/order")
     public String showOrder(ModelMap modelMap){
         modelMap.addAttribute("date",new SearchDateOrder());

@@ -3,6 +3,7 @@ package com.example.phonestore.service;
 import com.example.phonestore.DAO.CustomerDAO;
 import com.example.phonestore.object.GetCustomer;
 import com.example.phonestore.object.GetStaff;
+import com.example.phonestore.object.ResponseMessageGetHistoryOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -43,4 +44,9 @@ public class CustomerServiceImp implements CustomerService {
                 = new PageImpl<GetCustomer>(list, PageRequest.of(currentPage, pageSize), customers.size());
 
         return customerPage;    }
+
+    @Override
+    public ResponseMessageGetHistoryOrder getListHistory(String theId) {
+        return customerDAO.getListHistory(theId);
+    }
 }

@@ -2,6 +2,7 @@ package com.example.phonestore.service;
 
 import com.example.phonestore.DAO.PhoneDAO;
 import com.example.phonestore.object.*;
+import com.example.phonestore.object.PostColor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -102,5 +103,15 @@ public class PhoneServiceImp implements PhoneService {
                 = new PageImpl<Color>(list, PageRequest.of(currentPage, pageSize), colors.size());
 
         return colorPage;
+    }
+
+    @Override
+    public void postColor(PostColor color) {
+        phoneDAO.postColor(color);
+    }
+
+    @Override
+    public void postBrand(PostBrand brand) {
+        phoneDAO.postBrand(brand);
     }
 }

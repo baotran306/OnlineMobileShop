@@ -4,6 +4,7 @@ import com.example.phonestore.DAO.StaffDAO;
 import com.example.phonestore.object.GetStaff;
 import com.example.phonestore.object.StaffUpdate;
 import com.example.phonestore.object.StaffUpload;
+import com.example.phonestore.object.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -69,5 +70,10 @@ public class StaffServiceImp implements StaffService {
     @Override
     public void postStaff(StaffUpload staffUpload) {
         staffDAO.postStaff(staffUpload);
+    }
+
+    @Override
+    public void resetPassword(User user) {
+        staffDAO.resetPassword(user);
     }
 }

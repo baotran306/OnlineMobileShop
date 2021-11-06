@@ -1,6 +1,7 @@
 package com.example.phonestore.DAO;
 
 import com.example.phonestore.object.*;
+import com.example.phonestore.object.PostColor;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -67,6 +68,28 @@ public class PhoneDAOImp implements PhoneDAO {
         Mono<ResponseMessage> response = client.post()
                 .uri("admin/update-phone")
                 .body(Mono.just(phone),PhonePut.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage responseMessage = response.block();
+        System.out.println(responseMessage.toString());
+    }
+
+    @Override
+    public void postColor(PostColor color) {
+        Mono<ResponseMessage> response = client.post()
+                .uri("admin/insert-phone-color")
+                .body(Mono.just(color),PostColor.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage responseMessage = response.block();
+        System.out.println(responseMessage.toString());
+    }
+
+    @Override
+    public void postBrand(PostBrand brand) {
+        Mono<ResponseMessage> response = client.post()
+                .uri("admin/insert-phone-type")
+                .body(Mono.just(brand),PostBrand.class)
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage responseMessage = response.block();

@@ -1,6 +1,7 @@
 package com.example.phonestore.service;
 
 import com.example.phonestore.object.*;
+import com.example.phonestore.object.PostColor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,5 +16,6 @@ public interface PhoneService {
     public Page<Phone> findPaginated(Pageable pageable);
     public Page<Brand> findPaginatedBrands(Pageable pageable);
     public Page<Color> findPaginatedColors(Pageable pageable);
-
+    public void postColor(PostColor color);
+    public void postBrand(PostBrand brand);
 }
