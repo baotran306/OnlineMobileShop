@@ -25,7 +25,6 @@ public class LoginDAOImp implements LoginDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseLoginMessage>() {
                 });
         ResponseLoginMessage message = response.block();
-        System.out.println(message.toString());
         return message;
     }
 }

@@ -52,26 +52,22 @@ public class PhoneDAOImp implements PhoneDAO {
 
     @Override
     public void savePhone(PhonePost phone) {
-        System.out.println(phone.toString());
         Mono<ResponseMessage> response = client.post()
                 .uri("admin/insert-phone")
                 .body(Mono.just(phone),PhonePost.class)
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage responseMessage = response.block();
-        System.out.println(responseMessage.toString());
     }
 
     @Override
     public void updatePhone(PhonePut phone) {
-        System.out.println(phone.toString());
         Mono<ResponseMessage> response = client.post()
                 .uri("admin/update-phone")
                 .body(Mono.just(phone),PhonePut.class)
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage responseMessage = response.block();
-        System.out.println(responseMessage.toString());
     }
 
     @Override
@@ -82,7 +78,6 @@ public class PhoneDAOImp implements PhoneDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage responseMessage = response.block();
-        System.out.println(responseMessage.toString());
     }
 
     @Override
@@ -93,6 +88,5 @@ public class PhoneDAOImp implements PhoneDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage responseMessage = response.block();
-        System.out.println(responseMessage.toString());
     }
 }

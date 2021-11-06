@@ -50,7 +50,6 @@ public class StaffDAOImp implements StaffDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();
-        System.out.println(message.toString());
     }
 
     @Override
@@ -61,7 +60,6 @@ public class StaffDAOImp implements StaffDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();
-        System.out.println(message.toString());
     }
 
     @Override
@@ -72,7 +70,6 @@ public class StaffDAOImp implements StaffDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();
-        System.out.println(message.toString());
     }
 
     @Override
@@ -83,7 +80,6 @@ public class StaffDAOImp implements StaffDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();
-        System.out.println(message.toString());
     }
 
     @Override
@@ -103,7 +99,6 @@ public class StaffDAOImp implements StaffDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();
-        System.out.println(message.toString());
         return message;
     }
 
@@ -115,7 +110,6 @@ public class StaffDAOImp implements StaffDAO {
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();
-        System.out.println(message.toString());
         return message;
     }
 }
