@@ -41,7 +41,7 @@ public class activityInformation extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private ImageView waitforpay,process,transport,iconCart;
-    private TextView textViewProfile,logout,textShowName,textShowNum;
+    private TextView textViewProfile,logout,textShowName,textShowNum,textChangePassword;
 
     private Toolbar toolbar;
     private FloatingActionButton floatingActionButton;
@@ -68,6 +68,7 @@ public class activityInformation extends AppCompatActivity {
         showName();
         setShowNum();
         clickIconCart();
+        clickChangePassword();
     }
     private void initUi(){
         appBarLayout = (AppBarLayout) findViewById(R.id.appbarlayout_id);
@@ -82,6 +83,7 @@ public class activityInformation extends AppCompatActivity {
         iconCart = (ImageView) findViewById(R.id.store_icon);
         textShowNum = (TextView) findViewById(R.id.textShowNotifycation_id);
         textShowName = (TextView) findViewById(R.id.shop_fullname_id);
+        textChangePassword = (TextView) findViewById(R.id.textViewChangePass_id);
 
         //recyclerView = (RecyclerView) findViewById(R.id.recyclerview_information_id);
     }
@@ -94,6 +96,19 @@ public class activityInformation extends AppCompatActivity {
         });
     }
 
+    private void clickChangePassword(){
+        textChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openChangePassword();
+            }
+        });
+    }
+    private void openChangePassword(){
+        Intent intent = new Intent(this,ActivityChangePassword.class);
+        startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
+    }
     private void clickIconCart(){
         iconCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +159,7 @@ public class activityInformation extends AppCompatActivity {
     private void openLogin(){
         Intent intent = new Intent(this, activityLogin.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.slide_from_right,R.anim.slide_to_left);
     }
 
     private void setOnclickLogout(){

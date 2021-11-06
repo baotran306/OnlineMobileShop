@@ -57,12 +57,23 @@
 
             <TextView
                 android:id="@+id/textViewCategory_id"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="#edecec"
+                android:textAlignment="center"
                 android:padding="8dp"
                 android:text="Category" />
+            <TextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:padding="8dp"
+                android:textSize="20dp"
+                android:textColor="@color/textColorBlue"
+                android:text="100000 VND" />
+
 
             <TextView
                 android:id="@+id/textViewDecription"
@@ -70,7 +81,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:text="Description"
-                android:textSize="10sp" />
+                android:textSize="20dp" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </RelativeLayout>

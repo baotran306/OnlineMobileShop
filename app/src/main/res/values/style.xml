@@ -10,7 +10,7 @@
         <item name="boxCornerRadiusTopStart">15dp</item>
         <item name="boxCornerRadiusTopEnd">15dp</item>
     </style>
-    <style name="AppThemeMaterial" parent="Theme.MaterialComponents.Light.DarkActionBar">
+    <style name="AppThemeMaterial" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/design_default_color_primary</item>
         <item name="colorPrimaryDark">@color/design_default_color_primary_dark</item>

@@ -70,6 +70,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         Intent intent = new Intent(mContext,activityPhone.class);
 
         intent.putExtra("Phone",mfilteredData.get(position));
+        intent.putExtra("show","disShow");
 
         mContext.startActivity(intent);
     }

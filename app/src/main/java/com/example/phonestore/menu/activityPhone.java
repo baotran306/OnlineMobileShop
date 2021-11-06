@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.icu.text.DecimalFormat;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +31,7 @@ import com.squareup.picasso.Picasso;
 
 public class activityPhone extends AppCompatActivity {
 
-    private TextView tvTitle, tvDescription, tvCategory;
+    private TextView tvTitle, tvDescription, tvCategory,tvPrice;
     private Button btn_addOrder;
     private Phone temp;
     private ImageView img, itemBack;
@@ -55,17 +57,23 @@ public class activityPhone extends AppCompatActivity {
         iconCart = (ImageView) findViewById(R.id.store_icon);
         textShowNum = (TextView) findViewById(R.id.textShowNotifycation_id);
         relativeLayout = (RelativeLayout) findViewById(R.id.notifocation);
+        tvPrice = (TextView)findViewById(R.id.price);
 
         Intent intent = getIntent();
 
         temp = (Phone) intent.getSerializableExtra("Phone");
         show = intent.getStringExtra("show");
         setShowNum();
+        DecimalFormat formatter = new DecimalFormat("###,###,###");
         if (show.equals("show")) {
             btn_addOrder.setVisibility(View.INVISIBLE);
             iconCart.setVisibility(View.INVISIBLE);
         }
         tvTitle.setText(temp.getPhoneName());
+        tvCategory.setText(Html.fromHtml(
+                "<p><b>Brand:</b> "+temp.getPhoneType()+"<br>"+"<b>Color:</b> "+temp.getColor()+"<br>"+"<b>Quantity:</b> "+temp.getQuantity()+"</p>"
+        ));
+        tvPrice.setText(formatter.format(temp.getPrice())+"VNĐ");
         tvDescription.setText(temp.getDescription());
         Picasso.with(this).load(url + temp.getImage()).into(img);
         clickItemBack();
