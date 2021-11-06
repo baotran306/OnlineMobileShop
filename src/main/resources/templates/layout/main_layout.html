@@ -18,9 +18,9 @@
             <div>
                 <nav class="menu">
                     <ul>
-                        <li>
+                        <li class="nav-user">
                             <span>User: </span>
-                            <a href="#" th:text="${session.user.getStaffInfo().username}"/>
+                            <a href="/admin/staff/profile" th:text="${session.user.getStaffInfo().username}"/>
                         </li>
                         <li id="nav-1-home" class="nav-home">
                             <a href="/admin/order">
@@ -62,6 +62,24 @@
                                 <span>Customer</span>
                             </a>
                         </li>
+                        <div class="dropdown-product">
+                            <li id="nav-5-product" class="nav-product">
+                                <a href="/admin/staff/profile">
+                                    <span class="fas fa-user-edit"></span>
+                                    <span>Profile</span>
+                                </a>
+                            </li>
+                            <div class="dropdown-nav-product">
+                                <a href="/admin/staff/profile">
+                                    <span class="fas fa-user-edit"></span>
+                                    <span>Edit profile</span>
+                                </a>
+                                <a href="/admin/staff/change-password">
+                                    <span class="fas fa-key"></span>
+                                    <span>Edit password</span>
+                                </a>
+                            </div>
+                        </div>
                         <li id="nav-5-logout" class="nav-logout">
                             <a href="/admin/logout">
                                 <span class="fa fa-sign-out-alt"></span>

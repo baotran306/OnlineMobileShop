@@ -2,6 +2,8 @@ package com.example.phonestore.AdminController;
 
 import com.example.phonestore.object.*;
 import com.example.phonestore.object.PostColor;
+import com.example.phonestore.object.user.ChangePassword;
+import com.example.phonestore.object.user.PostStaff;
 import com.example.phonestore.object.user.ResponseLoginMessage;
 import com.example.phonestore.object.user.User;
 import com.example.phonestore.service.*;
@@ -38,6 +40,7 @@ public class controller {
     private CustomerService customerService;
     private OrderService orderService;
     private LoginService loginService;
+    private String message ="";
 
     public controller(PhoneService phoneService,StaffService staffService,
                       CustomerService customerService,OrderService orderService,LoginService loginService) {
@@ -310,7 +313,42 @@ public class controller {
     public String showFormLogin(ModelMap theModelMap,HttpSession session){
         theModelMap.addAttribute("account",new User());
         theModelMap.addAttribute("message",new ResponseLoginMessage());
+        session.setAttribute("message","");
         return "login/login";
+    }
+    @GetMapping("/staff/change-password")
+    public String changePassword(ModelMap theModelMap,HttpSession session){
+        theModelMap.addAttribute("changePassword",new ChangePassword());
+        theModelMap.addAttribute("message",message);
+        message="";
+        return "staff/change-password";
+    }
+
+    @PostMapping("/staff/change-password/save")
+    public String savePassword(@ModelAttribute("changePassword")ChangePassword changePassword,HttpSession session){
+        ResponseLoginMessage responseLoginMessage = (ResponseLoginMessage) session.getAttribute("user");
+        changePassword.setUsername(responseLoginMessage.getStaffInfo().getUsername());
+        ResponseMessage responseMessage = staffService.changePassword(changePassword);
+        message= responseMessage.getInfo();
+        return "redirect:/admin/staff/change-password";
+    }
+
+
+    @GetMapping("/staff/profile")
+    public String changeInfo(ModelMap theModelMap,HttpSession session){
+        ResponseLoginMessage responseLoginMessage =
+                (ResponseLoginMessage) session.getAttribute("user");
+        theModelMap.addAttribute("profile",staffService.getProfile(responseLoginMessage.getStaffInfo().getId()));
+        theModelMap.addAttribute("message",message);
+        message="";
+        return "staff/profile-staff";
+    }
+    @PostMapping("/staff/profile/save")
+    public String saveProfile(@ModelAttribute("profile")PostStaff postStaff,ModelMap theModelMap){
+        ResponseMessage responseMessage=staffService.updateProfile(postStaff);
+        theModelMap.addAttribute("message",responseMessage.getInfo());
+        message= responseMessage.getInfo();
+        return "redirect:/admin/staff/profile";
     }
 
     @PostMapping("/login-fail")

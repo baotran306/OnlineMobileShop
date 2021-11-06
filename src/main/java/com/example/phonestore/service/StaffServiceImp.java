@@ -2,8 +2,11 @@ package com.example.phonestore.service;
 
 import com.example.phonestore.DAO.StaffDAO;
 import com.example.phonestore.object.GetStaff;
+import com.example.phonestore.object.ResponseMessage;
 import com.example.phonestore.object.StaffUpdate;
 import com.example.phonestore.object.StaffUpload;
+import com.example.phonestore.object.user.ChangePassword;
+import com.example.phonestore.object.user.PostStaff;
 import com.example.phonestore.object.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -75,5 +78,20 @@ public class StaffServiceImp implements StaffService {
     @Override
     public void resetPassword(User user) {
         staffDAO.resetPassword(user);
+    }
+
+    @Override
+    public PostStaff getProfile(String theId) {
+        return staffDAO.getProfile(theId);
+    }
+
+    @Override
+    public ResponseMessage updateProfile(PostStaff postStaff) {
+        return staffDAO.updateProfile(postStaff);
+    }
+
+    @Override
+    public ResponseMessage changePassword(ChangePassword changePassword) {
+        return staffDAO.changePassword(changePassword);
     }
 }

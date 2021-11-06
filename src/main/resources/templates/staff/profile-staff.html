@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="~{layout/main_layout}">
+<head>
+    <meta charset="UTF-8">
+    <link href="/css/staff-info-style.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="/jscript/error-profile.js" th:src="@{/jscript/error-profile.js}"></script>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container-staff-info">
+        <form action="/admin/staff/profile/save" id="form-profile-staff" th:object="${profile}" method="post">
+            <div class="container-upload-staff-info">
+                <header> <b>PROFILE</b></header>
+                <div id="content1" class="form-content-info" >
+                    <div class="form-center-center">
+                        <div class="staff-container-info">
+                            <p>
+                                <input hidden th:field="*{idStaff}">
+                                <label><b>Last name</b></label>
+                                <input type="text" th:field="*{lastName}" class="input-text-phone-style" id="last-name-info" />
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                        <div class="staff-container-info">
+                            <p>
+                                <label><b>First name</b></label>
+                                <input th:field="*{firstName}" type="text" class="input-text-phone-style" id="first-name-info" />
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                        <div class="staff-container-info">
+                            <p>
+                                <label><b>Identity Card</b></label>
+                                <input type="text" th:field="*{identityCard}" class="input-text-phone-style" id="identity-card-info" />
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                        <div class="staff-container-info">
+                            <p>
+                                <label><b>Phone number</b></label>
+                                <input type="text" th:field="*{phoneNumber}" class="input-text-phone-style" id="phone-number-info" />
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                        <div class="staff-container-info">
+                            <p>
+                                <label><b>Gender</b></label>
+                                <select id="Role-staff-update" class="input-text-phone-style" th:field="*{gender}">
+                                    <option th:value="Nam"
+                                            th:utext="Nam"/>
+                                    <option th:value="Nữ"
+                                            th:utext="Nữ"/>
+                                </select>
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                        <div class="staff-container-info">
+                            <p>
+                                <label><b>Date of birth</b></label>
+                                <input type="date" th:field="*{dateOfBirth}" class="input-text-phone-style" id="date-of-birth-info" />
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                        <div class="staff-container-info">
+                            <p>
+                                <label><b>Email</b></label>
+                                <input type="text" th:field="*{email}" class="input-text-phone-style" id="email-info" />
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                        <div class="staff-container-info">
+                            <p>
+                                <label><b>Address</b></label>
+                                <input type="text" th:field="*{address}" class="input-text-phone-style" id="address-info" />
+                                <i class="fas fa-exclamation-circle"></i>
+                                <small>Error message</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <footer>
+                    <div class="vertical-center-staff-info">
+                        <button type="submit" class="btn-add">SAVE</button>
+                    </div>
+                    <p th:text="${message}" class="message"/>
+                </footer>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

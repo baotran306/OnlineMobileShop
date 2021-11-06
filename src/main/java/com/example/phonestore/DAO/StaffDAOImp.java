@@ -1,6 +1,8 @@
 package com.example.phonestore.DAO;
 
 import com.example.phonestore.object.*;
+import com.example.phonestore.object.user.ChangePassword;
+import com.example.phonestore.object.user.PostStaff;
 import com.example.phonestore.object.user.User;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpHeaders;
@@ -82,5 +84,38 @@ public class StaffDAOImp implements StaffDAO {
                 });
         ResponseMessage message = response.block();
         System.out.println(message.toString());
+    }
+
+    @Override
+    public PostStaff getProfile(String theId) {
+        Mono<PostStaff> response = client.get()
+                .uri("staff/show-info/"+theId)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<PostStaff>() {
+                });
+        PostStaff staffs = response.block();
+        return staffs;    }
+
+    @Override
+    public ResponseMessage updateProfile(PostStaff postStaff) {
+        Mono<ResponseMessage> response = client.post()
+                .uri("person/change-info")
+                .body(Mono.just(postStaff), PostStaff.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage message = response.block();
+        System.out.println(message.toString());
+        return message;
+    }
+
+    @Override
+    public ResponseMessage changePassword(ChangePassword changePassword) {
+        Mono<ResponseMessage> response = client.post()
+                .uri("staff/change-password")
+                .body(Mono.just(changePassword), ChangePassword.class)
+                .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
+                });
+        ResponseMessage message = response.block();
+        System.out.println(message.toString());
+        return message;
     }
 }

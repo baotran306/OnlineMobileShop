@@ -1,0 +1,161 @@
+.container-upload-staff-info {
+    display: grid;
+    height: 80vh;
+    width: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.1fr 1fr 0.1fr;
+    grid-template-areas: "header" "content1" "footer";
+}
+
+header {
+    grid-area: header;
+    text-align: center;
+    vertical-align: middle;
+    background-color: aqua;
+    width: 100%;
+    height: 24px;
+}
+
+footer {
+    background-color: white;
+    grid-area: footer;
+}
+
+#content1 {
+    grid-area: content1;
+    background-color: white;
+    margin-left: 150px;
+}
+
+.form-staff-design-left {
+    margin-left: 10px;
+    position: absolute;
+    min-height: 70vh;
+    min-width: 60vh;
+    right: 100px;
+    top: 50px;
+}
+
+.staff-container-info {
+    display: block;
+    position: relative;
+}
+
+.form-center-left {
+    position: absolute;
+    top: 10px;
+    right: 40px;
+}
+
+.form-center-right {
+    position: absolute;
+    left: 30px;
+}
+
+.form-staff-design-right {
+    margin-left: 10px;
+    position: absolute;
+    min-height: 85vh;
+    min-width: 60vh;
+    left: 100px;
+    top: 50px;
+}
+
+.vertical-center {
+    position: absolute;
+    bottom: 20px;
+    left: 400px;
+}
+
+.container-staff-info {
+    box-shadow: 3px 3px 3px 3px darkgray;
+    border-radius: 5px 5px 5px 5px;
+    position: relative;
+    top: 10px;
+    left: 50px;
+    width: 150vh;
+    height: 90vh;
+    margin-bottom: 20px;
+}
+
+.staff-container-info i {
+    position: absolute;
+    visibility: hidden;
+    right: -20px;
+    top: 30px;
+}
+
+.staff-container-info small {
+    position: absolute;
+    visibility: hidden;
+    left: 0px;
+    top: 50px;
+}
+
+.staff-container-info.error i.fa-exclamation-circle {
+    visibility: visible;
+    color: red;
+}
+
+.staff-container-info.error small {
+    visibility: visible;
+    color: red;
+}
+
+.staff-container-info.success i.fa-exclamation-circle {
+    visibility: hidden;
+}
+
+.staff-container-info.success small {
+    visibility: hidden;
+}
+
+.table-add-staff {
+    width: 100%;
+}
+
+.table-add-staff tr {
+    display: flex;
+}
+
+.staff-container-info i.fa-eye {
+    visibility: visible;
+    position: absolute;
+    top: 32px;
+    right: 5px;
+}
+
+.staff-container-info i.fa-eye-slash {
+    visibility: visible;
+    position: absolute;
+    right: 5px;
+    top: 32px;
+}
+
+.vertical-center-staff-info {
+    position: absolute;
+    bottom: 50px;
+    left: 500px;
+}
+
+.form-staff-design-center {
+    position: absolute;
+    min-height: 85vh;
+    min-width: 60vh;
+    left: 0px;
+    top: 50px;
+}
+
+.form-center-center {
+    position: absolute;
+    top: 50px;
+    right: 400px;
+}
+.staff-container-info.error input {
+    border-color: red;
+}
+.message{
+    color: red;
+    position: relative;
+    left: 350px;
+}

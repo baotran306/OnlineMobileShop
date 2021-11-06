@@ -23,7 +23,7 @@ function checkInputUpdate() {
         setErrorFor($('#salary-staff-update')[0], "Salary cannot blank");
         return false;
     } else {
-        setSuccesFor($('#salary-staff-update')[0]);
+        setSuccessFor($('#salary-staff-update')[0]);
         return true;
     }
 
@@ -37,7 +37,7 @@ function setErrorFor(input, message) {
     formControl.className = 'staff-container error';
 }
 
-function setSuccesFor(input) {
+function setSuccessFor(input) {
     const formControl = input.parentElement;
     formControl.className = 'staff-container success';
 }
