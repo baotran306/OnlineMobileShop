@@ -108,4 +108,19 @@ public class PostStaff {
     public void setIdentityCard(String identityCard) {
         this.identityCard = identityCard;
     }
+
+    @Override
+    public String toString() {
+        return "PostStaff{" +
+                "idStaff='" + idStaff + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", dateOfBirth='" + dateOfBirth + '\'' +
+                ", gender='" + gender + '\'' +
+                ", identityCard='" + identityCard + '\'' +
+                '}';
+    }
 }

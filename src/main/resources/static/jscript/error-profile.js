@@ -76,7 +76,11 @@ function checkInput() {
         setErrorFor($('#phone-number-info')[0], "Phone number cannot blank");
         isCheck = false;
     } else {
-        setSuccessFor($('#phone-number-info')[0]);
+        if(phoneNumberValue.match(/^[0]{1}\d{9}$/)){
+            setSuccessFor($('#phone-number-info')[0]);
+        }else {
+            setErrorFor($('#phone-number-info')[0], "Phone number only first num 0");
+        }
     }
 
     if (dateOfBirthValue === '') {

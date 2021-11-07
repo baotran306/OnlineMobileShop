@@ -62,11 +62,12 @@
                                     <span th:case="*">Nhân viên bán hàng</span>
                                 </td>
 
-                                <td th:text="${staffTemp.salary}"/>
+                                <td> <span th:text="${#numbers.formatDecimal(staffTemp.salary, 0, 'COMMA', 0, 'POINT')}">
+                                        </span>VNĐ</td>
                                 <td th:text="${staffTemp.userName}"/>
                                 <td><a class="btn btn-primary btn-sm mb-3" id="btn-update-staff"
                                        th:href="@{/admin/staff/update(idStaff=${staffTemp.id})}">Update</a>
-                                    <a href="#" id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
+                                    <a href="#" th:if="${staffTemp.id!=session.user.getStaffInfo().id}" id="btn-delete-staff" class="btn btn-danger btn-sm mb-3"
                                        th:href="@{/admin/staff/delete(idStaff=${staffTemp.id})}"
                                        onclick="if(!(confirm('Are you sure want to delete this staff?'))) return false">Delete</a>
                                     <a id="btn-reset-pass" class="btn btn-danger btn-sm mb-3"

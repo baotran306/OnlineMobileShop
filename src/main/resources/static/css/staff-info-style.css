@@ -135,7 +135,7 @@ footer {
 .vertical-center-staff-info {
     position: absolute;
     bottom: 50px;
-    left: 500px;
+    left: 480px;
 }
 
 .form-staff-design-center {
@@ -149,7 +149,7 @@ footer {
 .form-center-center {
     position: absolute;
     top: 50px;
-    right: 400px;
+    right: 350px;
 }
 .staff-container-info.error input {
     border-color: red;

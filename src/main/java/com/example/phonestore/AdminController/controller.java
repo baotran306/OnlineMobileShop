@@ -344,7 +344,10 @@ public class controller {
         return "staff/profile-staff";
     }
     @PostMapping("/staff/profile/save")
-    public String saveProfile(@ModelAttribute("profile")PostStaff postStaff,ModelMap theModelMap){
+    public String saveProfile(@ModelAttribute("profile")PostStaff postStaff,ModelMap theModelMap,HttpSession session){
+        ResponseLoginMessage responseLoginMessage =
+                (ResponseLoginMessage) session.getAttribute("user");
+        postStaff.setIdStaff(responseLoginMessage.getStaffInfo().getId());
         ResponseMessage responseMessage=staffService.updateProfile(postStaff);
         theModelMap.addAttribute("message",responseMessage.getInfo());
         message= responseMessage.getInfo();
