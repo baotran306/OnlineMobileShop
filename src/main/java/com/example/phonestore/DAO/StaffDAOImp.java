@@ -63,13 +63,14 @@ public class StaffDAOImp implements StaffDAO {
     }
 
     @Override
-    public void postStaff(StaffUpload staffUpload) {
+    public ResponseMessage postStaff(StaffUpload staffUpload) {
         Mono<ResponseMessage> response = client.post()
                 .uri("admin/insert-staff")
                 .body(Mono.just(staffUpload), StaffUpload.class)
                 .retrieve().bodyToMono(new ParameterizedTypeReference<ResponseMessage>() {
                 });
         ResponseMessage message = response.block();
+        return message;
     }
 
     @Override

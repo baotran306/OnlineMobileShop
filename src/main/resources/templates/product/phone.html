@@ -56,7 +56,7 @@
                                         </span>VNĐ
                                     </td>
                                     <td th:text="${tempPhone.quantity}"/>
-                                    <td th:text="${tempPhone.description}"/>
+                                    <td style="text-align: justify" th:text="${tempPhone.description}"/>
                                     <td>
                                         <a class="btn btn-primary btn-sm mb-3"
                                            th:href="@{/admin/updatePhone(idPhone=${tempPhone.id})}">Update</a>
@@ -132,7 +132,7 @@
                             <span class="sp-price"> ${data[i].price} </span>
                             </span>VNĐ</td>
                             <td>${phonePage[i].quantity}</td>
-                            <td>${phonePage[i].phone_description}</td>
+                            <td style="text-align: justify">${phonePage[i].phone_description}</td>
                             <td>
                             <a class="btn btn-primary btn-sm mb-3" href="/admin/updatePhone?idPhone=${phonePage[i].id}">Update</a>
                             </td>
@@ -152,7 +152,7 @@
                 <span class="sp-price"> ${data[i].price} </span>
                 </span>VNĐ</td>
                 <td>${data[i].quantity}</td>
-                <td>${data[i].phone_description}</td>
+                <td style="text-align: justify">${data[i].phone_description}</td>
                 <td>
                 <a class="btn btn-primary btn-sm mb-3" href="/admin/updatePhone?idPhone=${data[i].id}">Update</a>
                 </td>

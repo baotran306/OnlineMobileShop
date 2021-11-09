@@ -15,7 +15,7 @@ public interface StaffDAO {
     public GetStaff getStaffById(String theId);
     public void deleteStaffById(String theId);
     public void updateStaff(StaffUpdate staffUpdate);
-    public void postStaff(StaffUpload staffUpload);
+    public ResponseMessage postStaff(StaffUpload staffUpload);
     public void resetPassword(User user);
     public PostStaff getProfile(String theId);
     public ResponseMessage updateProfile(PostStaff postStaff);

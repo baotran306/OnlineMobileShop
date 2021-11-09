@@ -232,12 +232,18 @@ public class controller {
     @GetMapping(value = "/staff/upload-staff")
     public String showFormForUpLoad(ModelMap theModelMap){
         theModelMap.addAttribute("staff",new StaffUpload());
+        theModelMap.addAttribute("message",message);
+        message="";
         return "staff/upload-staff";
     }
     @PostMapping(value = "/staff/upload-staff/save")
-    public String saveUploadStaff(@ModelAttribute("staff") StaffUpload staff){
+    public String saveUploadStaff(@ModelAttribute("staff") StaffUpload staff,ModelMap theModelMap){
         System.out.println(staff.toString());
-        staffService.postStaff(staff);
+        ResponseMessage responseMessage = staffService.postStaff(staff);
+        if(responseMessage.getResult()==false){
+            message = responseMessage.getInfo();
+            return "redirect:/admin/staff/upload-staff";
+        }
         return "redirect:/admin/staff";
     }
 

@@ -18,7 +18,7 @@ public interface StaffService {
     public void deleteStaffById(String theId);
     public void updateStaff(StaffUpdate staffUpdate);
     public Page<GetStaff> findPaginated(Pageable pageable);
-    public void postStaff(StaffUpload staffUpload);
+    public ResponseMessage postStaff(StaffUpload staffUpload);
     public void resetPassword(User user);
     public PostStaff getProfile(String theId);
     public ResponseMessage updateProfile(PostStaff postStaff);

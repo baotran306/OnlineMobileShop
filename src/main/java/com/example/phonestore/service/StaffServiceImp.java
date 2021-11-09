@@ -71,8 +71,8 @@ public class StaffServiceImp implements StaffService {
     }
 
     @Override
-    public void postStaff(StaffUpload staffUpload) {
-        staffDAO.postStaff(staffUpload);
+    public ResponseMessage postStaff(StaffUpload staffUpload) {
+        return staffDAO.postStaff(staffUpload);
     }
 
     @Override
