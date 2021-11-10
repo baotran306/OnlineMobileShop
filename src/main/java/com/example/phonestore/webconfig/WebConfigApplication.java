@@ -28,6 +28,7 @@ public class WebConfigApplication implements WebMvcConfigurer {
         registry.addInterceptor(new StaffInterceptor())
                 .addPathPatterns("/admin/staff")
                 .addPathPatterns("/admin/staff/update/save")
+                .addPathPatterns("/admin/staff/upload-staff")
                 .addPathPatterns("/admin/staff/update")
                 .addPathPatterns("/admin/staff/delete")
                 .addPathPatterns("/admin/staff/reset");
